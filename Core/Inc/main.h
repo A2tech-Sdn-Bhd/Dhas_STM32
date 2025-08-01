@@ -41,12 +41,6 @@ extern "C" {
 //#include "microros.h"
 //#include "/MICROROS/microros.h"
 extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
-
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 

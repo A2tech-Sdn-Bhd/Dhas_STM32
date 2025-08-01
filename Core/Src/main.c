@@ -25,6 +25,8 @@
 /* USER CODE BEGIN Includes */
 uint32_t frequency1,joystick_x;
 uint32_t capture_value;
+uint8_t txData[8];
+float linear,angular;
 
 /* USER CODE END Includes */
 
@@ -45,20 +47,34 @@ typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+CAN_HandleTypeDef hcan2;
+
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim5;
 
-/* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
+/* Definitions for microrosTask */
+osThreadId_t microrosTaskHandle;
 uint32_t defaultTaskBuffer[ 3000 ];
 osStaticThreadDef_t defaultTaskControlBlock;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
+const osThreadAttr_t microrosTask_attributes = {
+  .name = "microrosTask",
   .cb_mem = &defaultTaskControlBlock,
   .cb_size = sizeof(defaultTaskControlBlock),
   .stack_mem = &defaultTaskBuffer[0],
   .stack_size = sizeof(defaultTaskBuffer),
   .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for mainTask */
+osThreadId_t mainTaskHandle;
+uint32_t mainTaskBuffer[ 3000 ];
+osStaticThreadDef_t mainTaskControlBlock;
+const osThreadAttr_t mainTask_attributes = {
+  .name = "mainTask",
+  .cb_mem = &mainTaskControlBlock,
+  .cb_size = sizeof(mainTaskControlBlock),
+  .stack_mem = &mainTaskBuffer[0],
+  .stack_size = sizeof(mainTaskBuffer),
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 /* USER CODE BEGIN PV */
 
@@ -69,7 +85,9 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM5_Init(void);
-void StartDefaultTask(void *argument);
+static void MX_CAN2_Init(void);
+void StartmicrorosTask(void *argument);
+void startmainTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -111,6 +129,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   MX_TIM5_Init();
+  MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -135,8 +154,11 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of defaultTask */
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  /* creation of microrosTask */
+  microrosTaskHandle = osThreadNew(StartmicrorosTask, NULL, &microrosTask_attributes);
+
+  /* creation of mainTask */
+  mainTaskHandle = osThreadNew(startmainTask, NULL, &mainTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -205,6 +227,43 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief CAN2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_CAN2_Init(void)
+{
+
+  /* USER CODE BEGIN CAN2_Init 0 */
+
+  /* USER CODE END CAN2_Init 0 */
+
+  /* USER CODE BEGIN CAN2_Init 1 */
+
+  /* USER CODE END CAN2_Init 1 */
+  hcan2.Instance = CAN2;
+  hcan2.Init.Prescaler = 12;
+  hcan2.Init.Mode = CAN_MODE_NORMAL;
+  hcan2.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan2.Init.TimeSeg1 = CAN_BS1_11TQ;
+  hcan2.Init.TimeSeg2 = CAN_BS2_2TQ;
+  hcan2.Init.TimeTriggeredMode = DISABLE;
+  hcan2.Init.AutoBusOff = DISABLE;
+  hcan2.Init.AutoWakeUp = DISABLE;
+  hcan2.Init.AutoRetransmission = ENABLE;
+  hcan2.Init.ReceiveFifoLocked = DISABLE;
+  hcan2.Init.TransmitFifoPriority = DISABLE;
+  if (HAL_CAN_Init(&hcan2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN2_Init 2 */
+
+  /* USER CODE END CAN2_Init 2 */
+
 }
 
 /**
@@ -372,10 +431,21 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_13, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PD13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
@@ -439,73 +509,87 @@ void * microros_reallocate(void * pointer, size_t size, void * state);
 void * microros_zero_allocate(size_t number_of_elements, size_t size_of_element, void * state);
 /* USER CODE END 4 */
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_StartmicrorosTask */
 /**
-  * @brief  Function implementing the defaultTask thread.
+  * @brief  Function implementing the microrosTask thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
-float linear,angular;
-void StartDefaultTask(void *argument)
+/* USER CODE END Header_StartmicrorosTask */
+
+void StartmicrorosTask(void *argument)
 {
   /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
-  rmw_uros_set_custom_transport(
-      true,
-      (void *) &hpcd_USB_OTG_FS,
-      cubemx_transport_open,
-      cubemx_transport_close,
-      cubemx_transport_write,
-      cubemx_transport_read);
-
-    rcl_allocator_t freeRTOS_allocator = rcutils_get_zero_initialized_allocator();
-    freeRTOS_allocator.allocate = microros_allocate;
-    freeRTOS_allocator.deallocate = microros_deallocate;
-    freeRTOS_allocator.reallocate = microros_reallocate;
-    freeRTOS_allocator.zero_allocate =  microros_zero_allocate;
-
-    rcutils_set_default_allocator(&freeRTOS_allocator);
-
-    // micro-ROS app
-
-    rcl_publisher_t publisher;
-    std_msgs__msg__Int32 msg;
-    rclc_support_t support;
-    rcl_allocator_t allocator;
-    rcl_node_t node;
-
-    allocator = rcl_get_default_allocator();
-
-    //create init_options
-    rclc_support_init(&support, 0, NULL, &allocator);
-
-    // create node
-    rclc_node_init_default(&node, "Stm32_node", "", &support);
-
-    // create publisher
-    rclc_publisher_init_default(
-      &publisher,
-      &node,
-      ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-      "Stm32_publisher");
-
-    msg.data = 0;
+//  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 5 */
 
   /* Infinite loop */
   for(;;)
   {
-	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
 	linear=((float)joystick_x-750)/250.0;
 	angular=((float)joystick_y-750)/250.0;
+	int16_t speed=100;
+    memcpy(&txData[4],&speed,2);
+    memcpy(&txData[6],&speed,2);
 //	rcl_publish(&publisher, &msg, NULL);
-    msg.data++;
+//    msg.data++;
 
-    osDelay(1);
+    osDelay(100);
   }
   /* USER CODE END 5 */
 }
+
+/* USER CODE BEGIN Header_startmainTask */
+/**
+* @brief Function implementing the mainTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_startmainTask */
+uint8_t ok;
+uint8_t mailbox;
+void startmainTask(void *argument)
+{
+  /* USER CODE BEGIN startmainTask */
+  /* Infinite loop */
+	CAN_FilterTypeDef filter;
+
+	filter.FilterBank = 14; // CAN2 filters use 14–27
+	filter.FilterMode = CAN_FILTERMODE_IDMASK;
+	filter.FilterScale = CAN_FILTERSCALE_32BIT;
+	filter.FilterIdHigh = 0x0000;
+	filter.FilterIdLow = 0x0000;
+	filter.FilterMaskIdHigh = 0x0000;
+	filter.FilterMaskIdLow = 0x0000;
+	filter.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+	filter.FilterActivation = ENABLE;
+	filter.SlaveStartFilterBank = 14; // Needed when using CAN2
+
+	HAL_CAN_ConfigFilter(&hcan2, &filter);
+	HAL_CAN_Start(&hcan2);
+	CAN_TxHeaderTypeDef   TxHeader;
+	uint32_t              TxMailbox;
+	TxHeader.IDE = CAN_ID_STD;
+	TxHeader.StdId = 0x601;
+	TxHeader.RTR = CAN_RTR_DATA;
+	TxHeader.DLC = 8;
+	TxHeader.TransmitGlobalTime = DISABLE;
+	txData[0] = 0x23; txData[1] = 0x00; txData[2] = 0x20; txData[3] = 0x01;
+	ok=0;
+  for(;;)
+  {
+	HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+    mailbox=HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
+    if(mailbox)
+    HAL_CAN_AddTxMessage(&hcan2, &TxHeader, txData, &TxMailbox);
+    osDelay(300);
+  }
+  /* USER CODE END startmainTask */
+}
+
+
+
+
 
 /**
   * @brief  Period elapsed callback in non blocking mode
