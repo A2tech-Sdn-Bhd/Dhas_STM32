@@ -9,6 +9,7 @@
 "./Core/Src/MICROROS/usb_cdc_transport.o"
 "./Core/Src/RC/rc.o"
 "./Core/Src/TIMER/tim.o"
+"./Core/Src/X3CATOR-S/x3cator.o"
 "./Core/Src/stm32f4xx_hal_msp.o"
 "./Core/Src/stm32f4xx_hal_timebase_tim.o"
 "./Core/Src/stm32f4xx_it.o"

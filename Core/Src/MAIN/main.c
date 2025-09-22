@@ -92,14 +92,14 @@ void StartmicrorosTask(void *argument)
   for(;;)
   {
     microros_spinnode();
+
     osDelay(10);
   }
 
 }
 
 
-uint8_t ok;
-uint8_t mailbox;
+
 float linear_vel,angular_vel;
 void startmainTask(void *argument)
 {
@@ -107,25 +107,11 @@ void startmainTask(void *argument)
 
 	HAL_CAN_Start(&hcan2);
 
-	CAN_TxHeaderTypeDef   TxHeader;
-	uint32_t              TxMailbox;
-	TxHeader.IDE = CAN_ID_STD;
-	TxHeader.StdId = 0x601;
-	TxHeader.RTR = CAN_RTR_DATA;
-	TxHeader.DLC = 8;
-	TxHeader.TransmitGlobalTime = DISABLE;
-	txData[0] = 0x23; txData[1] = 0x00; txData[2] = 0x20; txData[3] = 0x01;
-	ok=0;
+
   for(;;)
   {
     RC_convertPWMtoVelocity(&linear_vel,&angular_vel);
-	int16_t speedL=300*(vel.linear.x-vel.angular.z/2);
-	int16_t speedR=300*(vel.linear.x+vel.angular.z/2);
-    memcpy(&txData[4],&speedL,2);
-    memcpy(&txData[6],&speedR,2);
-    mailbox=HAL_CAN_GetTxMailboxesFreeLevel(&hcan2);
-    if(mailbox)
-    HAL_CAN_AddTxMessage(&hcan2, &TxHeader, txData, &TxMailbox);
+    x3cator_velocityset(linear_vel,angular_vel);
     osDelay(50);
   }
   /* USER CODE END startmainTask */

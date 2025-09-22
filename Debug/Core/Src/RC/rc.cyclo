@@ -1,2 +1,2 @@
-../Core/Src/RC/rc.c:18:6:RC_convertPWMtoVelocity	1
-../Core/Src/RC/rc.c:26:6:HAL_TIM_IC_CaptureCallback	5
+../Core/Src/RC/rc.c:17:6:RC_convertPWMtoVelocity	1
+../Core/Src/RC/rc.c:25:6:HAL_TIM_IC_CaptureCallback	5

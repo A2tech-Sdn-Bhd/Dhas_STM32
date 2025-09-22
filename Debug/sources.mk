@@ -29,6 +29,7 @@ Core/Src/MAIN \
 Core/Src/MICROROS \
 Core/Src/RC \
 Core/Src/TIMER \
+Core/Src/X3CATOR-S \
 Core/Src \
 Core/Startup \
 Drivers/STM32F4xx_HAL_Driver/Src \

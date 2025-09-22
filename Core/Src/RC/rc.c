@@ -10,7 +10,6 @@
 
 uint32_t frequency1,joystick_x;
 uint32_t capture_value;
-uint8_t txData[8];
 uint32_t frequency2,joystick_y;
 uint32_t capture_value2;
 uint32_t ccr2;
