@@ -200,7 +200,8 @@ Core/Src/MICROROS/microros.o: ../Core/Src/MICROROS/microros.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Src/MICROROS/microros.h
+ ../Core/Src/MICROROS/microros.h ../Core/Src/CAN/can.h \
+ ../Core/Src/TIMER/tim.h ../Core/Src/GPIO/gpio.h ../Core/Src/RC/rc.h
 ../Core/Src/MICROROS/microros.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/rcl.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/init.h:
@@ -404,3 +405,7 @@ Core/Src/MICROROS/microros.o: ../Core/Src/MICROROS/microros.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
 ../Core/Src/MICROROS/microros.h:
+../Core/Src/CAN/can.h:
+../Core/Src/TIMER/tim.h:
+../Core/Src/GPIO/gpio.h:
+../Core/Src/RC/rc.h:

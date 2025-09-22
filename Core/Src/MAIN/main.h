@@ -27,9 +27,14 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal.h"
+
 #include "freertos.h"
 #include "microros.h"
+#include "can.h"
+#include "tim.h"
+#include "gpio.h"
+#include "rc.h"
+
 
 //#include "microros.h"
 //#include "/MICROROS/microros.h"
