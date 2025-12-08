@@ -9,7 +9,20 @@
 #define SRC_RC_RC_H_
 
 
-#include "tim.h"
+#include "../TIMER/tim.h"
+#include "../GPIO/gpio.h"
+#include "../Moving_average/movg.h"
+#define x3cator_speed 3.0
+
+enum{
+XSTICK,
+YSTICK,
+SPEED,
+SWITCH
+};
+
+
+
 
 
 extern uint32_t frequency1,joystick_x;
@@ -18,7 +31,38 @@ extern uint8_t txData[8];
 extern uint32_t frequency2,joystick_y;
 extern uint32_t capture_value2;
 extern uint32_t ccr2;
+extern uint32_t value;
+extern uint8_t chIndex;
+extern Mov_Ave_t Rc;
+
+
+
+typedef struct {
+    uint32_t rising;
+    uint32_t pulse;
+    uint8_t  captured;
+    GPIO_t channel_pin;
+    TIM_t  timer;
+
+} RC_Channel_t;
+
+typedef struct{
+	float linear_vel;
+	float angular_vel;
+	float filtered_linear_vel;
+	float filtered_angular_vel;
+	float scale;
+	uint8_t auto_switch;
+}RC_State_t;
+
+
+extern RC_State_t x3cator_RC;
+extern RC_Channel_t rc[4];
 
 void RC_convertPWMtoVelocity(float *linear,float *angular);
+void Channel_handler(RC_Channel_t * rc);
+void RC_intialize();
+void channel_3handle();
+void RC_update();
 
 #endif /* SRC_RC_RC_H_ */

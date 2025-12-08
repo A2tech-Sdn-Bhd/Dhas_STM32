@@ -1,5 +1,6 @@
 ../Core/Src/TIMER/tim.c:31:6:SystemClock_Config	88	static
-../Core/Src/TIMER/tim.c:73:6:MX_TIM2_Init	72	static
-../Core/Src/TIMER/tim.c:142:6:MX_TIM5_Init	72	static
-../Core/Src/TIMER/tim.c:211:6:HAL_TIM_Base_MspInit	56	static
-../Core/Src/TIMER/tim.c:269:6:HAL_TIM_Base_MspDeInit	16	static
+../Core/Src/TIMER/tim.c:75:6:MX_TIM2_Init	48	static
+../Core/Src/TIMER/tim.c:142:6:MX_TIM3_Init	48	static
+../Core/Src/TIMER/tim.c:195:6:HAL_TIM_Base_MspInit	56	static
+../Core/Src/TIMER/tim.c:256:6:HAL_TIM_Base_MspDeInit	16	static
+../Core/Src/TIMER/tim.c:303:6:TIM_Set	24	static

@@ -1,7 +1,7 @@
 USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../USB_DEVICE/Target/usbd_conf.h ../Core/Src/MAIN/main.h \
- ../Core/Src/Freertos/freertos.h \
+ ../Core/Src/MAIN/../Freertos/freertos.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../Core/Inc/FreeRTOSConfig.h \
@@ -193,6 +193,7 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
@@ -201,8 +202,13 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../Core/Src/CAN/can.h ../Core/Src/TIMER/tim.h ../Core/Src/GPIO/gpio.h \
- ../Core/Src/RC/rc.h \
+ ../Core/Src/MAIN/../CAN/can.h ../Core/Src/MAIN/../TIMER/tim.h \
+ ../Core/Src/MAIN/../GPIO/gpio.h ../Core/Src/MAIN/../RC/rc.h \
+ ../Core/Src/MAIN/../RC/../TIMER/tim.h \
+ ../Core/Src/MAIN/../RC/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../RC/../Moving_average/movg.h \
+ ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h ../Core/Src/MAIN/../WDG/wdg.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
@@ -211,7 +217,7 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../USB_DEVICE/Target/usbd_conf.h:
 ../Core/Src/MAIN/main.h:
-../Core/Src/Freertos/freertos.h:
+../Core/Src/MAIN/../Freertos/freertos.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
@@ -403,6 +409,7 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
@@ -411,10 +418,16 @@ USB_DEVICE/App/usbd_desc.o: ../USB_DEVICE/App/usbd_desc.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
-../Core/Src/CAN/can.h:
-../Core/Src/TIMER/tim.h:
-../Core/Src/GPIO/gpio.h:
-../Core/Src/RC/rc.h:
+../Core/Src/MAIN/../CAN/can.h:
+../Core/Src/MAIN/../TIMER/tim.h:
+../Core/Src/MAIN/../GPIO/gpio.h:
+../Core/Src/MAIN/../RC/rc.h:
+../Core/Src/MAIN/../RC/../TIMER/tim.h:
+../Core/Src/MAIN/../RC/../GPIO/gpio.h:
+../Core/Src/MAIN/../RC/../Moving_average/movg.h:
+../Core/Src/MAIN/../X3CATOR-S/x3cator.h:
+../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h:
+../Core/Src/MAIN/../WDG/wdg.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:

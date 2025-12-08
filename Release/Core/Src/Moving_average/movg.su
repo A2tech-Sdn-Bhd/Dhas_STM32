@@ -1,0 +1,2 @@
+../Core/Src/Moving_average/movg.c:34:6:Moving_Average_Init	0	static
+../Core/Src/Moving_average/movg.c:60:6:Moving_Average_Filter	0	static

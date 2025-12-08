@@ -28,13 +28,20 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
+
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
+typedef struct{
+
+	TIM_HandleTypeDef *htim;
+	uint32_t channel;
+}TIM_t;
 
 extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
 
-extern TIM_HandleTypeDef htim5;
+
 
 /* USER CODE BEGIN Private defines */
 
@@ -43,7 +50,9 @@ void SystemClock_Config(void);
 
 
 void MX_TIM2_Init(void);
+void MX_TIM3_Init(void);
 void MX_TIM5_Init(void);
+void TIM_Set(TIM_HandleTypeDef *htim,uint32_t channel,TIM_t* tim);
 
 /* USER CODE BEGIN Prototypes */
 

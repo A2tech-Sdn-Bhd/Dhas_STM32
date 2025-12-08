@@ -26,7 +26,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "stm32f4xx_hal.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -40,7 +40,7 @@ extern CAN_HandleTypeDef hcan2;
 
 void MX_CAN2_Init(void);
 void CAN2_filterconfig(void);
-void CAN2_Sendstandard_message(uint32_t ID,const uint8_t data[]);
+void CAN2_Sendstandard_message(uint32_t ID,uint8_t* data);
 
 /* USER CODE BEGIN Prototypes */
 

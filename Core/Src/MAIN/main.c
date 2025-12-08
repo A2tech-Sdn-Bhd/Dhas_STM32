@@ -71,8 +71,12 @@ int main(void)
 
   MX_GPIO_Init();
   MX_TIM2_Init();
-  MX_TIM5_Init();
+  MX_TIM3_Init();
   MX_CAN2_Init();
+  RC_intialize();
+  watchdoginit(400,8);
+
+
 
 
   Freertos_start();
@@ -83,15 +87,15 @@ int main(void)
 
 void StartmicrorosTask(void *argument)
 {
-  MX_USB_DEVICE_Init();
-  microros_createnode();
-  microros_createsubscribers();
-  microros_createpublishers();
+//  MX_USB_DEVICE_Init();
+//  microros_createnode();
+//  microros_createsubscribers();
+//  microros_createpublishers();
 
 
   for(;;)
   {
-    microros_spinnode();
+//    microros_spinnode();
 
     osDelay(10);
   }
@@ -99,20 +103,39 @@ void StartmicrorosTask(void *argument)
 }
 
 
-
-float linear_vel,angular_vel;
+uint64_t ok ;
+uint8_t lidar[8];
 void startmainTask(void *argument)
 {
 	CAN2_filterconfig();
-
 	HAL_CAN_Start(&hcan2);
-
 
   for(;;)
   {
-    RC_convertPWMtoVelocity(&linear_vel,&angular_vel);
-    x3cator_velocityset(linear_vel,angular_vel);
-    osDelay(50);
+	watchdog();
+
+	RC_update();
+    if(x3cator_RC.auto_switch){
+    x3cator_velocityset(0.0,0.0);
+    }
+    else{
+    x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
+    }
+    ok++;
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+
+    lidar[0]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0);
+    lidar[1]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1);
+    lidar[2]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2);
+    lidar[3]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3);
+    lidar[4]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4);
+    lidar[5]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5);
+    lidar[6]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6);
+    lidar[7]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_7);
+//    printf("ahmed is goat \n");
+
+
+    osDelay(10);
   }
   /* USER CODE END startmainTask */
 }

@@ -27,8 +27,10 @@ Core/Src/Freertos \
 Core/Src/GPIO \
 Core/Src/MAIN \
 Core/Src/MICROROS \
+Core/Src/Moving_average \
 Core/Src/RC \
 Core/Src/TIMER \
+Core/Src/WDG \
 Core/Src/X3CATOR-S \
 Core/Src \
 Core/Startup \

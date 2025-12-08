@@ -49,7 +49,7 @@ void CAN2_filterconfig(void)
 	HAL_CAN_ConfigFilter(&hcan2, &filter);
 }
 
-void CAN2_Sendstandard_message(uint32_t ID,const uint8_t data[]){
+void CAN2_Sendstandard_message(uint32_t ID,uint8_t* data){
 
 	CAN_TxHeaderTypeDef   TxHeader;
 	uint32_t              TxMailbox;
@@ -58,7 +58,7 @@ void CAN2_Sendstandard_message(uint32_t ID,const uint8_t data[]){
 	TxHeader.RTR = CAN_RTR_DATA;
 	TxHeader.DLC = 8;
 	TxHeader.TransmitGlobalTime = DISABLE;
-
+    while(!HAL_CAN_GetTxMailboxesFreeLevel(&hcan2));
 	HAL_CAN_AddTxMessage(&hcan2, &TxHeader, data, &TxMailbox);
 
 
@@ -84,7 +84,7 @@ void MX_CAN2_Init(void)
   hcan2.Init.TimeTriggeredMode = DISABLE;
   hcan2.Init.AutoBusOff = ENABLE;
   hcan2.Init.AutoWakeUp = DISABLE;
-  hcan2.Init.AutoRetransmission = ENABLE;
+  hcan2.Init.AutoRetransmission = DISABLE;
   hcan2.Init.ReceiveFifoLocked = DISABLE;
   hcan2.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan2) != HAL_OK)

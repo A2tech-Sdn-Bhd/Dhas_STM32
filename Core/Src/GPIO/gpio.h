@@ -26,8 +26,13 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+//#include "main.h"
+#include "stm32f4xx_hal.h"
 
+typedef struct{
+	GPIO_TypeDef* GPIO_PORT;
+	uint16_t GPIO_Pin;
+}GPIO_t;
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
@@ -37,6 +42,7 @@ extern "C" {
 /* USER CODE END Private defines */
 
 void MX_GPIO_Init(void);
+void GPIO_Set(GPIO_TypeDef* GPIO_PORT,uint16_t GPIO_Pin,GPIO_t* gpio);
 
 /* USER CODE BEGIN Prototypes */
 

@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../Core/Src/GPIO/gpio.c 
+
+OBJS += \
+./Core/Src/GPIO/gpio.o 
+
+C_DEPS += \
+./Core/Src/GPIO/gpio.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+Core/Src/GPIO/%.o Core/Src/GPIO/%.su Core/Src/GPIO/%.cyclo: ../Core/Src/GPIO/%.c Core/Src/GPIO/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+
+clean: clean-Core-2f-Src-2f-GPIO
+
+clean-Core-2f-Src-2f-GPIO:
+	-$(RM) ./Core/Src/GPIO/gpio.cyclo ./Core/Src/GPIO/gpio.d ./Core/Src/GPIO/gpio.o ./Core/Src/GPIO/gpio.su
+
+.PHONY: clean-Core-2f-Src-2f-GPIO
+

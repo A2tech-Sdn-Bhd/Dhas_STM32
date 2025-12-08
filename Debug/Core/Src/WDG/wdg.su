@@ -1,0 +1,2 @@
+../Core/Src/WDG/wdg.c:24:6:watchdoginit	16	static
+../Core/Src/WDG/wdg.c:40:6:watchdog	8	static

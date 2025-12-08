@@ -20,8 +20,10 @@ RM := rm -rf
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/X3CATOR-S/subdir.mk
+-include Core/Src/WDG/subdir.mk
 -include Core/Src/TIMER/subdir.mk
 -include Core/Src/RC/subdir.mk
+-include Core/Src/Moving_average/subdir.mk
 -include Core/Src/MICROROS/subdir.mk
 -include Core/Src/MAIN/subdir.mk
 -include Core/Src/GPIO/subdir.mk
@@ -76,8 +78,8 @@ all: main-build
 main-build: microros.elf secondary-outputs
 
 # Tool invocations
-microros.elf microros.map: $(OBJS) $(USER_OBJS) /home/ahmed/STM32CubeIDE/workspace_1.18.1/microros/STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "microros.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/ahmed/STM32CubeIDE/workspace_1.18.1/microros/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="microros.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros -L../Core/Src/MICROROS --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+microros.elf microros.map: $(OBJS) $(USER_OBJS) /home/ahmed/STM32CubeIDE/final/Dhas_STM32/STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "microros.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/ahmed/STM32CubeIDE/final/Dhas_STM32/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="microros.map" -Wl,--gc-sections -static -L../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros -L../Core/Src/MICROROS --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
