@@ -207,7 +207,11 @@ USB_DEVICE/App/usb_device.o: ../USB_DEVICE/App/usb_device.c \
  ../Core/Src/MAIN/../RC/../GPIO/gpio.h \
  ../Core/Src/MAIN/../RC/../Moving_average/movg.h \
  ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
- ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h ../Core/Src/MAIN/../WDG/wdg.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../WDG/wdg.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
@@ -430,6 +434,9 @@ USB_DEVICE/App/usb_device.o: ../USB_DEVICE/App/usb_device.c \
 ../Core/Src/MAIN/../RC/../Moving_average/movg.h:
 ../Core/Src/MAIN/../X3CATOR-S/x3cator.h:
 ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h:
+../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h:
+../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
+../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
 ../Core/Src/MAIN/../WDG/wdg.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:

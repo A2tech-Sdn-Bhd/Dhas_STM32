@@ -26,6 +26,7 @@ RM := rm -rf
 -include Core/Src/Moving_average/subdir.mk
 -include Core/Src/MICROROS/subdir.mk
 -include Core/Src/MAIN/subdir.mk
+-include Core/Src/Lidar/subdir.mk
 -include Core/Src/GPIO/subdir.mk
 -include Core/Src/Freertos/subdir.mk
 -include Core/Src/CAN/subdir.mk

@@ -14,11 +14,19 @@
 #include "../Moving_average/movg.h"
 #define x3cator_speed 3.0
 
+
+
 enum{
 XSTICK,
 YSTICK,
 SPEED,
-SWITCH
+SWITCH,
+CHANNEL5,
+CHANNEL6,
+CHANNEL7,
+CHANNEL8,
+CHANNEL9,
+CHANNEL10
 };
 
 
@@ -57,7 +65,7 @@ typedef struct{
 
 
 extern RC_State_t x3cator_RC;
-extern RC_Channel_t rc[4];
+extern RC_Channel_t rc[10];
 
 void RC_convertPWMtoVelocity(float *linear,float *angular);
 void Channel_handler(RC_Channel_t * rc);

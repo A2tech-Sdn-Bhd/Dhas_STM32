@@ -25,6 +25,7 @@ SUBDIRS := \
 Core/Src/CAN \
 Core/Src/Freertos \
 Core/Src/GPIO \
+Core/Src/Lidar \
 Core/Src/MAIN \
 Core/Src/MICROROS \
 Core/Src/Moving_average \

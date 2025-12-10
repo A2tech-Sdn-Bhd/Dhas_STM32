@@ -33,6 +33,8 @@ typedef struct{
 	GPIO_TypeDef* GPIO_PORT;
 	uint16_t GPIO_Pin;
 }GPIO_t;
+
+
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */

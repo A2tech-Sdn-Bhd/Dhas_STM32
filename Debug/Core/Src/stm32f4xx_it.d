@@ -206,8 +206,11 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c \
  ../Core/Src/MAIN/../RC/../GPIO/gpio.h \
  ../Core/Src/MAIN/../RC/../Moving_average/movg.h \
  ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
- ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h ../Core/Src/MAIN/../WDG/wdg.h \
- ../Core/Inc/stm32f4xx_it.h
+ ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../WDG/wdg.h ../Core/Inc/stm32f4xx_it.h
 ../Core/Src/MAIN/main.h:
 ../Core/Src/MAIN/../Freertos/freertos.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
@@ -420,5 +423,8 @@ Core/Src/stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c \
 ../Core/Src/MAIN/../RC/../Moving_average/movg.h:
 ../Core/Src/MAIN/../X3CATOR-S/x3cator.h:
 ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h:
+../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h:
+../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
+../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
 ../Core/Src/MAIN/../WDG/wdg.h:
 ../Core/Inc/stm32f4xx_it.h:

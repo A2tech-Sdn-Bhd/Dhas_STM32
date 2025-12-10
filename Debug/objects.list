@@ -1,6 +1,7 @@
 "./Core/Src/CAN/can.o"
 "./Core/Src/Freertos/freertos.o"
 "./Core/Src/GPIO/gpio.o"
+"./Core/Src/Lidar/lidar.o"
 "./Core/Src/MAIN/main.o"
 "./Core/Src/MICROROS/custom_memory_manager.o"
 "./Core/Src/MICROROS/microros.o"

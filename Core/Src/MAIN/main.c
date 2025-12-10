@@ -104,7 +104,6 @@ void StartmicrorosTask(void *argument)
 
 
 uint64_t ok ;
-uint8_t lidar[8];
 void startmainTask(void *argument)
 {
 	CAN2_filterconfig();
@@ -115,24 +114,20 @@ void startmainTask(void *argument)
 	watchdog();
 
 	RC_update();
+
+
     if(x3cator_RC.auto_switch){
     x3cator_velocityset(0.0,0.0);
     }
     else{
     x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
     }
+
+
     ok++;
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
 
-    lidar[0]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_0);
-    lidar[1]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_1);
-    lidar[2]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2);
-    lidar[3]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3);
-    lidar[4]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_4);
-    lidar[5]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_5);
-    lidar[6]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_6);
-    lidar[7]=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_7);
-//    printf("ahmed is goat \n");
+    x3cator_update();
 
 
     osDelay(10);

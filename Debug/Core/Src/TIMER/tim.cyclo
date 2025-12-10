@@ -1,6 +1,7 @@
-../Core/Src/TIMER/tim.c:31:6:SystemClock_Config	3
-../Core/Src/TIMER/tim.c:75:6:MX_TIM2_Init	9
-../Core/Src/TIMER/tim.c:142:6:MX_TIM3_Init	6
-../Core/Src/TIMER/tim.c:195:6:HAL_TIM_Base_MspInit	3
-../Core/Src/TIMER/tim.c:256:6:HAL_TIM_Base_MspDeInit	3
-../Core/Src/TIMER/tim.c:303:6:TIM_Set	1
+../Core/Src/TIMER/tim.c:33:6:SystemClock_Config	3
+../Core/Src/TIMER/tim.c:80:6:MX_TIM2_Init	9
+../Core/Src/TIMER/tim.c:145:6:MX_TIM3_Init	9
+../Core/Src/TIMER/tim.c:210:6:MX_TIM4_Init	7
+../Core/Src/TIMER/tim.c:267:6:HAL_TIM_Base_MspInit	4
+../Core/Src/TIMER/tim.c:371:6:HAL_TIM_Base_MspDeInit	4
+../Core/Src/TIMER/tim.c:444:6:TIM_Set	1

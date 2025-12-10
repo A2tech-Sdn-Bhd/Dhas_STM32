@@ -47,6 +47,11 @@ void CAN2_filterconfig(void)
 
 
 	HAL_CAN_ConfigFilter(&hcan2, &filter);
+
+
+	HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 14, 0);
+	HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
+	HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
 }
 
 void CAN2_Sendstandard_message(uint32_t ID,uint8_t* data){
@@ -75,22 +80,26 @@ void MX_CAN2_Init(void)
   /* USER CODE BEGIN CAN2_Init 1 */
 
   /* USER CODE END CAN2_Init 1 */
-  hcan2.Instance = CAN2;
-  hcan2.Init.Prescaler = 12;
-  hcan2.Init.Mode = CAN_MODE_NORMAL;
-  hcan2.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan2.Init.TimeSeg1 = CAN_BS1_11TQ;
-  hcan2.Init.TimeSeg2 = CAN_BS2_2TQ;
-  hcan2.Init.TimeTriggeredMode = DISABLE;
-  hcan2.Init.AutoBusOff = ENABLE;
-  hcan2.Init.AutoWakeUp = DISABLE;
-  hcan2.Init.AutoRetransmission = DISABLE;
-  hcan2.Init.ReceiveFifoLocked = DISABLE;
-  hcan2.Init.TransmitFifoPriority = DISABLE;
-  if (HAL_CAN_Init(&hcan2) != HAL_OK)
-  {
-    Error_Handler();
-  }
+	hcan2.Instance = CAN2;
+	hcan2.Init.Prescaler = 12;
+	hcan2.Init.Mode = CAN_MODE_NORMAL;
+	hcan2.Init.SyncJumpWidth = CAN_SJW_1TQ;
+	hcan2.Init.TimeSeg1 = CAN_BS1_11TQ;
+	hcan2.Init.TimeSeg2 = CAN_BS2_2TQ;
+	hcan2.Init.TimeTriggeredMode = DISABLE;
+	hcan2.Init.AutoBusOff = ENABLE;
+	hcan2.Init.AutoWakeUp = DISABLE;
+	hcan2.Init.AutoRetransmission = DISABLE;
+	hcan2.Init.ReceiveFifoLocked = DISABLE;
+	hcan2.Init.TransmitFifoPriority = DISABLE;
+
+
+
+
+	if (HAL_CAN_Init(&hcan2) != HAL_OK)
+	{
+		Error_Handler();
+	}
   /* USER CODE BEGIN CAN2_Init 2 */
 
   /* USER CODE END CAN2_Init 2 */
@@ -154,5 +163,34 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 
 /* USER CODE BEGIN 1 */
+
+
+void CAN2_RX0_IRQHandler() {
+	HAL_CAN_IRQHandler(&hcan2);
+}
+
+
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
 
 /* USER CODE END 1 */

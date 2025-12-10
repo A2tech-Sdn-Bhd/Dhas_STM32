@@ -8,6 +8,8 @@
 #ifndef SRC_X3CATOR_S_X3CATOR_H_
 #define SRC_X3CATOR_S_X3CATOR_H_
 #include "../CAN/can.h"
+#include "../GPIO/gpio.h"
+#include "../Lidar/lidar.h"
 #define Distance_wheel_center 0.475
 #define Wheel_radius  0.355/2.0
 
@@ -21,8 +23,36 @@
 //	}
 //};
 extern uint8_t txData[8];
+
+typedef struct{
+
+	uint8_t lamp_white;
+	uint8_t lamp_yellow;
+	uint8_t lamp_rear_primary;
+	uint8_t lamp_rear_secondary;
+
+	uint8_t standby1;
+	uint8_t standby2;
+	uint8_t standby3;
+	uint8_t standby4;
+	uint8_t standby5;
+
+	uint8_t safety_bumper;
+
+	uint8_t motordriver1_enable;
+	uint8_t motordriver1_brake;
+	uint8_t motordriver2_enable;
+	uint8_t motordriver2_brake;
+
+}PCB_t;
+
+
+
+extern PCB_t x3cator;
 //extern float speedL,speedR;
 //extern float wr,wl;
 
 void x3cator_velocityset(float linear,float angular);
+
+void x3cator_update();
 #endif /* SRC_X3CATOR_S_X3CATOR_H_ */

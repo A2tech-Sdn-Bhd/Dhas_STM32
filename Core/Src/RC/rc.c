@@ -8,7 +8,7 @@
 #include "rc.h"
 
 
-RC_Channel_t rc[4];
+RC_Channel_t rc[10];
 
 RC_State_t x3cator_RC;
 
@@ -27,7 +27,7 @@ void RC_convertPWMtoVelocity(float *linear,float *angular){
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 
-	if (htim->Instance==TIM2 &&htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
+	if (htim->Instance==TIM2      &&htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
 	Channel_handler(&rc[SPEED]);
 	}
 
@@ -39,9 +39,34 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	Channel_handler(&rc[YSTICK]);
 	}
 
+	else if (htim->Instance==TIM2 &&htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4){
+	Channel_handler(&rc[CHANNEL5]);
+	}
+
 	else if (htim->Instance==TIM3 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
 	Channel_handler(&rc[SWITCH]);
 	}
+
+	else if (htim->Instance==TIM3 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2){
+	Channel_handler(&rc[CHANNEL6]);
+	}
+
+	else if (htim->Instance==TIM3 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3){
+	Channel_handler(&rc[CHANNEL7]);
+	}
+
+	else if (htim->Instance==TIM3 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4){
+	Channel_handler(&rc[CHANNEL8]);
+	}
+
+	else if (htim->Instance==TIM4 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1){
+	Channel_handler(&rc[CHANNEL9]);
+	}
+
+	else if (htim->Instance==TIM4 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2){
+	Channel_handler(&rc[CHANNEL10]);
+	}
+
 
 }
 
@@ -76,16 +101,36 @@ void RC_intialize(){
 Moving_Average_Init(&Rc1,&x3cator_RC.linear_vel,&x3cator_RC.filtered_linear_vel);
 Moving_Average_Init(&Rc2,&x3cator_RC.angular_vel,&x3cator_RC.filtered_angular_vel);
 
-GPIO_Set(GPIOA, GPIO_PIN_5,&rc[SPEED].channel_pin);
-GPIO_Set(GPIOA, GPIO_PIN_1,&rc[XSTICK].channel_pin);
-GPIO_Set(GPIOA, GPIO_PIN_2,&rc[YSTICK].channel_pin);
-GPIO_Set(GPIOA, GPIO_PIN_6,&rc[SWITCH].channel_pin);
+//timer2
+GPIO_Set(GPIOA, GPIO_PIN_15,&rc[SPEED].channel_pin);
+GPIO_Set(GPIOA, GPIO_PIN_1 ,&rc[XSTICK].channel_pin);
+GPIO_Set(GPIOB, GPIO_PIN_10,&rc[YSTICK].channel_pin);
+GPIO_Set(GPIOB, GPIO_PIN_11,&rc[CHANNEL5].channel_pin);
+
+//timer 3
+GPIO_Set(GPIOA, GPIO_PIN_6 ,&rc[SWITCH].channel_pin);
+GPIO_Set(GPIOA, GPIO_PIN_7, &rc[CHANNEL6].channel_pin);
+GPIO_Set(GPIOB, GPIO_PIN_0, &rc[CHANNEL7].channel_pin);
+GPIO_Set(GPIOB, GPIO_PIN_1, &rc[CHANNEL8].channel_pin);
+
+//timer4
+GPIO_Set(GPIOB, GPIO_PIN_6, &rc[CHANNEL9].channel_pin);
+GPIO_Set(GPIOB, GPIO_PIN_7,&rc[CHANNEL10].channel_pin);
+
 
 
 TIM_Set(&htim2,TIM_CHANNEL_1,&rc[SPEED].timer);
 TIM_Set(&htim2,TIM_CHANNEL_2,&rc[XSTICK].timer);
 TIM_Set(&htim2,TIM_CHANNEL_3,&rc[YSTICK].timer);
+TIM_Set(&htim2,TIM_CHANNEL_4,&rc[CHANNEL5].timer);
+
 TIM_Set(&htim3,TIM_CHANNEL_1,&rc[SWITCH].timer);
+TIM_Set(&htim3,TIM_CHANNEL_2,&rc[CHANNEL6].timer);
+TIM_Set(&htim3,TIM_CHANNEL_3,&rc[CHANNEL7].timer);
+TIM_Set(&htim3,TIM_CHANNEL_4,&rc[CHANNEL8].timer);
+
+TIM_Set(&htim4,TIM_CHANNEL_1,&rc[CHANNEL9].timer);
+TIM_Set(&htim4,TIM_CHANNEL_2,&rc[CHANNEL10].timer);
 
 
 
@@ -101,10 +146,6 @@ void RC_update(){
 	x3cator_RC.auto_switch=(rc[SWITCH].pulse<1500)? 1:0;
 	x3cator_RC.linear_vel*=x3cator_speed*x3cator_RC.scale;
 	x3cator_RC.angular_vel*=x3cator_speed*x3cator_RC.scale;
-
-
-
-
 }
 
 
