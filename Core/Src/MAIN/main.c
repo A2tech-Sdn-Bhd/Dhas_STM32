@@ -72,6 +72,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_TIM4_Init();
   MX_CAN2_Init();
   RC_intialize();
   watchdoginit(400,8);

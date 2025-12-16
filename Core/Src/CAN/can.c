@@ -49,9 +49,9 @@ void CAN2_filterconfig(void)
 	HAL_CAN_ConfigFilter(&hcan2, &filter);
 
 
-	HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 14, 0);
-	HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
-	HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
+//	HAL_NVIC_SetPriority(CAN2_RX0_IRQn, 14, 0);
+//	HAL_NVIC_EnableIRQ(CAN2_RX0_IRQn);
+//	HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
 }
 
 void CAN2_Sendstandard_message(uint32_t ID,uint8_t* data){
