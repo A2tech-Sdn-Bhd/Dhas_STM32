@@ -48,7 +48,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 25;
+  RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
@@ -308,8 +308,8 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	/* TIM2 interrupt Init */
-	HAL_NVIC_SetPriority(TIM2_IRQn, 5, 0);
-	HAL_NVIC_EnableIRQ(TIM2_IRQn);
+//	HAL_NVIC_SetPriority(TIM2_IRQn, 5, 0);
+//	HAL_NVIC_EnableIRQ(TIM2_IRQn);
   /* USER CODE BEGIN TIM2_MspInit 1 */
 
   /* USER CODE END TIM2_MspInit 1 */
@@ -345,8 +345,8 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 	/* TIM3 interrupt Init */
-	HAL_NVIC_SetPriority(TIM3_IRQn, 5, 0);
-	HAL_NVIC_EnableIRQ(TIM3_IRQn);
+//	HAL_NVIC_SetPriority(TIM3_IRQn, 5, 0);
+//	HAL_NVIC_EnableIRQ(TIM3_IRQn);
   /* USER CODE BEGIN TIM3_MspInit 1 */
 
   /* USER CODE END TIM3_MspInit 1 */
@@ -372,8 +372,8 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* USER CODE BEGIN TIM4_MspInit 1 */
-    HAL_NVIC_SetPriority(TIM4_IRQn, 5, 0);
-    HAL_NVIC_EnableIRQ(TIM4_IRQn);
+//    HAL_NVIC_SetPriority(TIM4_IRQn, 5, 0);
+//    HAL_NVIC_EnableIRQ(TIM4_IRQn);
 
   /* USER CODE END TIM4_MspInit 1 */
   }

@@ -104,7 +104,7 @@ void StartmicrorosTask(void *argument)
 }
 
 
-uint64_t ok ;
+uint64_t ok;
 void startmainTask(void *argument)
 {
 	CAN2_filterconfig();
@@ -112,6 +112,7 @@ void startmainTask(void *argument)
 
   for(;;)
   {
+
 	watchdog();
 
 	RC_update();
@@ -123,8 +124,6 @@ void startmainTask(void *argument)
     else{
     x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
     }
-
-
     ok++;
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
 

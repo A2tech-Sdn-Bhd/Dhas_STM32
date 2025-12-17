@@ -38,7 +38,7 @@ const osThreadAttr_t microrosTask_attributes = {
 };
 /* Definitions for mainTask */
 osThreadId_t mainTaskHandle;
-uint32_t mainTaskBuffer[ 3000 ];
+uint32_t mainTaskBuffer[ 5000 ];
 osStaticThreadDef_t mainTaskControlBlock;
 const osThreadAttr_t mainTask_attributes = {
   .name = "mainTask",
