@@ -15,7 +15,8 @@ rclc_executor_t executor;
 geometry_msgs__msg__Twist vel;
 
 
-void microros_intitilize(void){
+
+rcl_ret_t microros_intitilize(void){
 
 	rmw_uros_set_custom_transport(
 			true,
@@ -37,9 +38,9 @@ void microros_intitilize(void){
     allocator = rcl_get_default_allocator();
 
     //create init_options
-    rclc_support_init(&support, 0, NULL, &allocator);
+//    rcl_ret_t ret = rclc_support_init(&support, 0, NULL, &allocator);
 
-
+//    return ret;
 
 }
 
@@ -49,7 +50,7 @@ void microros_createnode(void){
 
     rclc_node_init_default(&node, "Stm32_node", "", &support);
     executor = rclc_executor_get_zero_initialized_executor();
-    rclc_executor_init(&executor, &support.context, 1, &allocator);
+    rclc_executor_init(&executor, &support.context, 2, &allocator);
 
 
 }
@@ -62,10 +63,18 @@ void microros_createsubscribers(void){
 			&subscriber,
 			&node,
 			ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg,Twist),
-			"/cmd_vel_smooth");
+			"/cmd_vel");
+	rclc_executor_add_subscription(
+	  &executor,
+	  &subscriber,
+	  &vel,
+	  &subscription_callback,
+	  ON_NEW_DATA);
 
 
 }
+
+
 
 void microros_createpublishers(void){
 
@@ -81,4 +90,19 @@ void microros_createpublishers(void){
 
 void microros_spinnode(void){
 	rclc_executor_spin_some(&executor, 50 * 1000000);
+}
+
+
+
+
+
+void subscription_callback(){
+
+
+
+
+
+
+
+
 }

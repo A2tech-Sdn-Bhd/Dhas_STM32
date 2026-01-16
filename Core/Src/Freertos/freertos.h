@@ -26,4 +26,5 @@
 
 void StartmicrorosTask(void *argument);
 void startmainTask(void *argument);
+void RGB_task(void *argument);
 void Freertos_start(void);

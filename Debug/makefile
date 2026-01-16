@@ -22,6 +22,7 @@ RM := rm -rf
 -include Core/Src/X3CATOR-S/subdir.mk
 -include Core/Src/WDG/subdir.mk
 -include Core/Src/TIMER/subdir.mk
+-include Core/Src/RGB/subdir.mk
 -include Core/Src/RC/subdir.mk
 -include Core/Src/Moving_average/subdir.mk
 -include Core/Src/MICROROS/subdir.mk
@@ -29,6 +30,7 @@ RM := rm -rf
 -include Core/Src/Lidar/subdir.mk
 -include Core/Src/GPIO/subdir.mk
 -include Core/Src/Freertos/subdir.mk
+-include Core/Src/DMA/subdir.mk
 -include Core/Src/CAN/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk

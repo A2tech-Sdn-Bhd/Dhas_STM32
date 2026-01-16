@@ -44,11 +44,12 @@ extern geometry_msgs__msg__Twist vel;
 
 
 
-void microros_intitilize(void);
+rcl_ret_t microros_intitilize(void);
 void microros_createnode(void);
 void microros_createsubscribers(void);
 void microros_createpublishers(void);
 void microros_spinnode(void);
+void subscription_callback();
 
 
 #endif /* SRC_MICROROS_MICROROS_H_ */

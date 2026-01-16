@@ -1,2 +1,10 @@
-../Core/Src/X3CATOR-S/x3cator.c:16:6:x3cator_velocityset	3
-../Core/Src/X3CATOR-S/x3cator.c:54:6:x3cator_update	1
+../Core/Src/X3CATOR-S/x3cator.c:17:6:x3cator_velocityset	3
+../Core/Src/X3CATOR-S/x3cator.c:54:6:x3cator_pin_update	1
+../Core/Src/X3CATOR-S/x3cator.c:77:6:x3cator_state_update	7
+../Core/Src/X3CATOR-S/x3cator.c:100:6:x3cator_IDLE	1
+../Core/Src/X3CATOR-S/x3cator.c:115:6:x3cator_MANUAL	1
+../Core/Src/X3CATOR-S/x3cator.c:128:6:x3cator_AUTONOMUS	1
+../Core/Src/X3CATOR-S/x3cator.c:129:6:x3cator_SAFETY_LIMITED	1
+../Core/Src/X3CATOR-S/x3cator.c:130:6:x3cator_ESTOP	1
+../Core/Src/X3CATOR-S/x3cator.c:131:6:x3cator_FAULT	1
+../Core/Src/X3CATOR-S/x3cator.c:136:6:x3cator_update	6

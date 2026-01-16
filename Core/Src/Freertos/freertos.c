@@ -38,7 +38,7 @@ const osThreadAttr_t microrosTask_attributes = {
 };
 /* Definitions for mainTask */
 osThreadId_t mainTaskHandle;
-uint32_t mainTaskBuffer[ 5000 ];
+uint32_t mainTaskBuffer[ 7000];
 osStaticThreadDef_t mainTaskControlBlock;
 const osThreadAttr_t mainTask_attributes = {
   .name = "mainTask",
@@ -47,6 +47,21 @@ const osThreadAttr_t mainTask_attributes = {
   .stack_mem = &mainTaskBuffer[0],
   .stack_size = sizeof(mainTaskBuffer),
   .priority = (osPriority_t) osPriorityAboveNormal,
+};
+
+
+
+/*definitions of RGB task*/
+osThreadId_t RGBTaskHandle;
+uint32_t RGBTaskBuffer[ 512 ];
+osStaticThreadDef_t RGBTaskControlBlock;
+const osThreadAttr_t RGBTask_attributes = {
+  .name = "RGBTask",
+  .cb_mem = &RGBTaskControlBlock,
+  .cb_size = sizeof(RGBTaskControlBlock),
+  .stack_mem = &RGBTaskBuffer[0],
+  .stack_size = sizeof(RGBTaskBuffer),
+  .priority = (osPriority_t) osPriorityNormal,
 };
 
 /* Private includes ----------------------------------------------------------*/
@@ -62,6 +77,7 @@ void Freertos_start(void ){
 
 	  microrosTaskHandle = osThreadNew(StartmicrorosTask, NULL, &microrosTask_attributes);
 	  mainTaskHandle = osThreadNew(startmainTask, NULL, &mainTask_attributes);
+//	  RGBTaskHandle = osThreadNew(RGB_task, NULL, &RGBTask_attributes);
 
 
 	  osKernelStart();

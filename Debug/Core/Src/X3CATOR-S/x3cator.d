@@ -34,7 +34,12 @@ Core/Src/X3CATOR-S/x3cator.o: ../Core/Src/X3CATOR-S/x3cator.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  ../Core/Src/X3CATOR-S/../GPIO/gpio.h \
  ../Core/Src/X3CATOR-S/../Lidar/lidar.h \
- ../Core/Src/X3CATOR-S/../Lidar/../GPIO/gpio.h
+ ../Core/Src/X3CATOR-S/../Lidar/../GPIO/gpio.h \
+ ../Core/Src/X3CATOR-S/../RC/rc.h \
+ ../Core/Src/X3CATOR-S/../RC/../TIMER/tim.h \
+ ../Core/Src/X3CATOR-S/../RC/../TIMER/../DMA/dma.h \
+ ../Core/Src/X3CATOR-S/../RC/../GPIO/gpio.h \
+ ../Core/Src/X3CATOR-S/../RC/../Moving_average/movg.h
 ../Core/Src/X3CATOR-S/x3cator.h:
 ../Core/Src/X3CATOR-S/../CAN/can.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -72,3 +77,8 @@ Core/Src/X3CATOR-S/x3cator.o: ../Core/Src/X3CATOR-S/x3cator.c \
 ../Core/Src/X3CATOR-S/../GPIO/gpio.h:
 ../Core/Src/X3CATOR-S/../Lidar/lidar.h:
 ../Core/Src/X3CATOR-S/../Lidar/../GPIO/gpio.h:
+../Core/Src/X3CATOR-S/../RC/rc.h:
+../Core/Src/X3CATOR-S/../RC/../TIMER/tim.h:
+../Core/Src/X3CATOR-S/../RC/../TIMER/../DMA/dma.h:
+../Core/Src/X3CATOR-S/../RC/../GPIO/gpio.h:
+../Core/Src/X3CATOR-S/../RC/../Moving_average/movg.h:

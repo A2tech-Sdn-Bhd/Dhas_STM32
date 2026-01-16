@@ -17,16 +17,24 @@
 
 
 enum{
-XSTICK,
-YSTICK,
-SPEED,
-SWITCH,
-CHANNEL5,
-CHANNEL6,
-CHANNEL7,
-CHANNEL8,
-CHANNEL9,
-CHANNEL10
+	XSTICK,
+	YSTICK,
+	SPEED,
+	SWITCH,
+	CHANNEL5,
+	CHANNEL6,
+	CHANNEL7,
+	CHANNEL8,
+	CHANNEL9,
+	CHANNEL10
+};
+
+
+enum{
+	NOT_STARTED,
+	NOT_VALID,
+	VALID,
+	DISCONNECTED
 };
 
 
@@ -61,7 +69,10 @@ typedef struct{
 	float filtered_angular_vel;
 	float scale;
 	uint8_t auto_switch;
+	uint8_t validity;
 }RC_State_t;
+
+
 
 
 extern RC_State_t x3cator_RC;
@@ -72,5 +83,6 @@ void Channel_handler(RC_Channel_t * rc);
 void RC_intialize();
 void channel_3handle();
 void RC_update();
+void RC_state_check();
 
 #endif /* SRC_RC_RC_H_ */

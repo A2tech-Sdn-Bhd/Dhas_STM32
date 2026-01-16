@@ -10,6 +10,7 @@
 #include "../CAN/can.h"
 #include "../GPIO/gpio.h"
 #include "../Lidar/lidar.h"
+#include "../RC/rc.h"
 #define Distance_wheel_center 0.475
 #define Wheel_radius  0.355/2.0
 
@@ -23,6 +24,16 @@
 //	}
 //};
 extern uint8_t txData[8];
+
+enum{
+	BOOTING,
+	IDLE,
+	MANUAL,
+	AUTONOMOUS,
+	SAFETY_LIMITED,
+	E_STOP,
+	FAULT
+};
 
 typedef struct{
 
@@ -48,7 +59,9 @@ typedef struct{
 
 
 
-extern PCB_t x3cator;
+
+extern PCB_t x3cator_PCB;
+extern uint8_t x3cator_state;
 //extern float speedL,speedR;
 //extern float wr,wl;
 

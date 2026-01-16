@@ -70,12 +70,14 @@ int main(void)
 
 
   MX_GPIO_Init();
+//  MX_DMA_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
+  MX_TIM5_Init();
   MX_CAN2_Init();
   RC_intialize();
-  watchdoginit(400,8);
+//  watchdoginit(400,8);
 
 
 
@@ -85,31 +87,49 @@ int main(void)
 
 }
 
-
+rmw_ret_t ros_ok=1;
+uint8_t ros_init=0;
+//uint64_t ok[2];
 void StartmicrorosTask(void *argument)
 {
 //  MX_USB_DEVICE_Init();
-//  microros_createnode();
-//  microros_createsubscribers();
-//  microros_createpublishers();
+//  microros_intitilize();
+  //wait for microros agent
+
+
+//  rclc_support_fini(&support);
+//
+
 
 
   for(;;)
   {
+
+//    ros_ok=rmw_uros_ping_agent(100, 1);
+//
+//    if(!ros_ok){
+//
+//    	rclc_support_init(&support, 0, NULL, &allocator);
+//    	microros_createnode();
+//    	microros_createsubscribers();
+//    	microros_createpublishers();
+//
+//    }
+//
+//    if(ros_init)
 //    microros_spinnode();
+//	  ok[1]++;
 
     osDelay(10);
   }
 
 }
 
-
-uint64_t ok;
 void startmainTask(void *argument)
 {
 	CAN2_filterconfig();
 	HAL_CAN_Start(&hcan2);
-
+    x3cator_state=IDLE;
   for(;;)
   {
 
@@ -117,23 +137,21 @@ void startmainTask(void *argument)
 
 	RC_update();
 
-
-    if(x3cator_RC.auto_switch){
-    x3cator_velocityset(0.0,0.0);
-    }
-    else{
-    x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
-    }
-    ok++;
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
-
     x3cator_update();
 
+//    ok[0]++;
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
 
-    osDelay(10);
+
+
+    osDelay(100);
   }
   /* USER CODE END startmainTask */
 }
+
+
+
+
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

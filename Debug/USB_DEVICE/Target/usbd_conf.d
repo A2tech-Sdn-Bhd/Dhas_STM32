@@ -201,8 +201,9 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/rosidl_generator_c__visibility_control.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__type_support.h \
  ../USB_DEVICE/App/usb_device.h ../Core/Src/MAIN/../CAN/can.h \
- ../Core/Src/MAIN/../TIMER/tim.h ../Core/Src/MAIN/../GPIO/gpio.h \
- ../Core/Src/MAIN/../RC/rc.h ../Core/Src/MAIN/../RC/../TIMER/tim.h \
+ ../Core/Src/MAIN/../TIMER/tim.h ../Core/Src/MAIN/../TIMER/../DMA/dma.h \
+ ../Core/Src/MAIN/../GPIO/gpio.h ../Core/Src/MAIN/../RC/rc.h \
+ ../Core/Src/MAIN/../RC/../TIMER/tim.h \
  ../Core/Src/MAIN/../RC/../GPIO/gpio.h \
  ../Core/Src/MAIN/../RC/../Moving_average/movg.h \
  ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
@@ -210,7 +211,7 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
  ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
  ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
  ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
- ../Core/Src/MAIN/../WDG/wdg.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h ../Core/Src/MAIN/../WDG/wdg.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
@@ -423,6 +424,7 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
 ../USB_DEVICE/App/usb_device.h:
 ../Core/Src/MAIN/../CAN/can.h:
 ../Core/Src/MAIN/../TIMER/tim.h:
+../Core/Src/MAIN/../TIMER/../DMA/dma.h:
 ../Core/Src/MAIN/../GPIO/gpio.h:
 ../Core/Src/MAIN/../RC/rc.h:
 ../Core/Src/MAIN/../RC/../TIMER/tim.h:
@@ -433,6 +435,7 @@ USB_DEVICE/Target/usbd_conf.o: ../USB_DEVICE/Target/usbd_conf.c \
 ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h:
 ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
 ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
+../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h:
 ../Core/Src/MAIN/../WDG/wdg.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:

@@ -8,9 +8,10 @@
 #include "x3cator.h"
 #include "math.h"
 
-uint8_t txData[8];
+uint8_t backmotor_data[8],frontmotor_data[8];
 int16_t speedL,speedR;
-PCB_t x3cator;
+PCB_t x3cator_PCB;
+uint8_t x3cator_state;
 float wr,wl;
 
 void x3cator_velocityset(float linear,float angular){
@@ -25,51 +26,134 @@ void x3cator_velocityset(float linear,float angular){
 	speedR=0;
 	if(fabs(speedL)<5)
 	speedL=0;
-	txData[0] = 0x23; txData[1] = 0x02; txData[2] = 0x20;
+	backmotor_data[0] = 0x23; backmotor_data[1] = 0x02; backmotor_data[2] = 0x20;
+	frontmotor_data[0] = 0x23; frontmotor_data[1] = 0x02; frontmotor_data[2] = 0x20;
 
-	txData[3] = 0x01;
-	txData[4]=(speedL)&0xFF;
-	txData[5]=(speedL>>8)&0xFF;
-    CAN2_Sendstandard_message(0x602,txData);
-    txData[3] = 0x02;
-	txData[4]=(speedR)&0xFF;
-	txData[5]=(speedR>>8)&0xFF;
-    CAN2_Sendstandard_message(0x602,txData);
-	txData[3] = 0x01;
-	txData[4]=(-speedR)&0xFF;
-	txData[5]=(-speedR>>8)&0xFF;
-    CAN2_Sendstandard_message(0x601,txData);
-	txData[3] = 0x02;
-	txData[4]=(-speedL)&0xFF;
-	txData[5]=(-speedL>>8)&0xFF;
-    CAN2_Sendstandard_message(0x601,txData);
+	backmotor_data[3] = 0x01;
+	backmotor_data[4]=(speedL)&0xFF;
+	backmotor_data[5]=(speedL>>8)&0xFF;
+    CAN2_Sendstandard_message(0x602,backmotor_data);
+    backmotor_data[3] = 0x02;
+    backmotor_data[4]=(speedR)&0xFF;
+    backmotor_data[5]=(speedR>>8)&0xFF;
+    CAN2_Sendstandard_message(0x602,backmotor_data);
+    frontmotor_data[3] = 0x01;
+    frontmotor_data[4]=(-speedR)&0xFF;
+    frontmotor_data[5]=(-speedR>>8)&0xFF;
+    CAN2_Sendstandard_message(0x601,frontmotor_data);
+    frontmotor_data[3] = 0x02;
+    frontmotor_data[4]=(-speedL)&0xFF;
+	frontmotor_data[5]=(-speedL>>8)&0xFF;
+    CAN2_Sendstandard_message(0x601,frontmotor_data);
 
 
 
 
 }
 
+void x3cator_pin_update(){
+
+
+
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6,x3cator_PCB.motordriver1_enable);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7,x3cator_PCB.motordriver1_brake);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8,x3cator_PCB.motordriver2_enable);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9,x3cator_PCB.motordriver2_brake);
+
+	x3cator_PCB.safety_bumper=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11);
+
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0,!x3cator_PCB.lamp_white);
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1,!x3cator_PCB.lamp_yellow);
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2,!x3cator_PCB.lamp_rear_primary);
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3,!x3cator_PCB.lamp_rear_secondary);
+
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10,x3cator_PCB.standby1);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13,x3cator_PCB.standby2);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_12,x3cator_PCB.standby3);
+
+    lidar_update(&safety_lidars);
+
+}
+void x3cator_state_update(){
+
+	if(x3cator_state==IDLE){
+
+		if(x3cator_RC.validity==VALID && x3cator_RC.auto_switch ==0)
+		x3cator_state=MANUAL;
+
+	}
+
+	if(x3cator_state==MANUAL){
+
+		if(x3cator_RC.validity!=VALID || x3cator_RC.auto_switch ==1)
+		x3cator_state=IDLE;
+
+	}
+
+
+
+
+
+
+}
+
+void x3cator_IDLE(){
+
+	x3cator_velocityset(0.0,0.0);
+	x3cator_PCB.lamp_rear_primary=0;
+	x3cator_PCB.lamp_rear_secondary=0;
+
+	x3cator_PCB.lamp_white=0;
+	x3cator_PCB.lamp_yellow=0;
+
+	x3cator_state_update();
+
+}
+
+
+
+void x3cator_MANUAL(){
+
+    x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
+	x3cator_PCB.lamp_rear_primary=1;
+	x3cator_PCB.lamp_rear_secondary=0;
+
+	x3cator_PCB.lamp_white=1;
+	x3cator_PCB.lamp_yellow=0;
+
+	x3cator_state_update();
+
+}
+
+void x3cator_AUTONOMUS(){};
+void x3cator_SAFETY_LIMITED(){};
+void x3cator_ESTOP(){}
+void x3cator_FAULT(){};
+
+
 
 
 void x3cator_update(){
 
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6,x3cator.motordriver1_enable);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7,x3cator.motordriver1_brake);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8,x3cator.motordriver2_enable);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9,x3cator.motordriver2_brake);
+	x3cator_pin_update();
 
-	x3cator.safety_bumper=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11);
 
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0,x3cator.lamp_white);
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1,x3cator.lamp_yellow);
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2,x3cator.lamp_rear_primary);
-	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3,x3cator.lamp_rear_secondary);
+	if(x3cator_state==IDLE)
+		x3cator_IDLE();
 
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10,x3cator.standby1);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13,x3cator.standby2);
-	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_12,x3cator.standby3);
+	else if(x3cator_state==MANUAL)
+		x3cator_MANUAL();
 
-    lidar_update(&safety_lidars);
+	else if(x3cator_state==AUTONOMOUS)
+		x3cator_AUTONOMUS();
 
+	else if(x3cator_state==SAFETY_LIMITED)
+		x3cator_SAFETY_LIMITED();
+
+	else if(x3cator_state==E_STOP)
+		x3cator_ESTOP();
+
+	else
+		x3cator_FAULT();
 
 }

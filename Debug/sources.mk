@@ -23,6 +23,7 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Src/CAN \
+Core/Src/DMA \
 Core/Src/Freertos \
 Core/Src/GPIO \
 Core/Src/Lidar \
@@ -30,6 +31,7 @@ Core/Src/MAIN \
 Core/Src/MICROROS \
 Core/Src/Moving_average \
 Core/Src/RC \
+Core/Src/RGB \
 Core/Src/TIMER \
 Core/Src/WDG \
 Core/Src/X3CATOR-S \
