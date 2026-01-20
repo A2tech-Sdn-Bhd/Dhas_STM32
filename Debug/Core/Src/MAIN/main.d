@@ -211,7 +211,9 @@ Core/Src/MAIN/main.o: ../Core/Src/MAIN/main.c ../Core/Src/MAIN/main.h \
  ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
  ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
  ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
- ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h ../Core/Src/MAIN/../WDG/wdg.h
+ ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../MICROROS/microros.h \
+ ../Core/Src/MAIN/../WDG/wdg.h
 ../Core/Src/MAIN/main.h:
 ../Core/Src/MAIN/../Freertos/freertos.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
@@ -430,4 +432,5 @@ Core/Src/MAIN/main.o: ../Core/Src/MAIN/main.c ../Core/Src/MAIN/main.h \
 ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
 ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
 ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h:
+../Core/Src/MAIN/../X3CATOR-S/../MICROROS/microros.h:
 ../Core/Src/MAIN/../WDG/wdg.h:

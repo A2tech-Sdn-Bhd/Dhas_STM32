@@ -11,8 +11,10 @@
 #include "../GPIO/gpio.h"
 #include "../Lidar/lidar.h"
 #include "../RC/rc.h"
+#include "../MICROROS/microros.h"
 #define Distance_wheel_center 0.475
 #define Wheel_radius  0.355/2.0
+#define safety_limit 0.5
 
 
 //typedef union{
@@ -24,8 +26,9 @@
 //	}
 //};
 extern uint8_t txData[8];
+extern float safety_vel_linear,safety_vel_angular;
 
-enum{
+typedef enum{
 	BOOTING,
 	IDLE,
 	MANUAL,
@@ -33,7 +36,7 @@ enum{
 	SAFETY_LIMITED,
 	E_STOP,
 	FAULT
-};
+}x3cator_state_t;
 
 typedef struct{
 
@@ -60,8 +63,12 @@ typedef struct{
 
 
 
+
 extern PCB_t x3cator_PCB;
-extern uint8_t x3cator_state;
+extern uint8_t mission_flag;
+extern x3cator_state_t x3cator_state;
+extern x3cator_state_t x3cator_previous_state;
+
 //extern float speedL,speedR;
 //extern float wr,wl;
 

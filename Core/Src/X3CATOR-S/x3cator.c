@@ -11,8 +11,11 @@
 uint8_t backmotor_data[8],frontmotor_data[8];
 int16_t speedL,speedR;
 PCB_t x3cator_PCB;
-uint8_t x3cator_state;
+x3cator_state_t x3cator_state;
+x3cator_state_t x3cator_previous_state;
+uint8_t mission_flag;
 float wr,wl;
+float safety_vel_linear,safety_vel_angular;
 
 void x3cator_velocityset(float linear,float angular){
 
@@ -60,7 +63,7 @@ void x3cator_pin_update(){
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8,x3cator_PCB.motordriver2_enable);
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9,x3cator_PCB.motordriver2_brake);
 
-	x3cator_PCB.safety_bumper=HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11);
+	x3cator_PCB.safety_bumper=!HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_11);
 
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0,!x3cator_PCB.lamp_white);
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1,!x3cator_PCB.lamp_yellow);
@@ -74,28 +77,142 @@ void x3cator_pin_update(){
     lidar_update(&safety_lidars);
 
 }
-void x3cator_state_update(){
 
-	if(x3cator_state==IDLE){
+
+void IDLE_state_update(){
+
 
 		if(x3cator_RC.validity==VALID && x3cator_RC.auto_switch ==0)
-		x3cator_state=MANUAL;
+			x3cator_state=MANUAL;
 
-	}
+		if(microros_state == MICROROS_STATE_READY && mission_flag)
+			x3cator_state=AUTONOMOUS;
 
-	if(x3cator_state==MANUAL){
 
-		if(x3cator_RC.validity!=VALID || x3cator_RC.auto_switch ==1)
+}
+
+void MANUAL_state_udate(){
+
+		if(x3cator_RC.validity!=VALID)
 		x3cator_state=IDLE;
 
+		if(x3cator_RC.auto_switch ==1 && microros_state == MICROROS_STATE_READY && mission_flag)
+			x3cator_state=AUTONOMOUS;
+
+		if(safety_lidars.zone1 && !x3cator_RC.safety_override || x3cator_PCB.safety_bumper ){
+			x3cator_state=E_STOP;
+		}
+
+		else if(safety_lidars.zone2 && !x3cator_RC.safety_override){
+			x3cator_state=SAFETY_LIMITED;
+		}
+
+
+		x3cator_previous_state=MANUAL;
+
+}
+
+void AUTONOMUS_state_update(){
+
+		if(microros_state != MICROROS_STATE_READY || !mission_flag  ){
+
+			if(x3cator_RC.validity==VALID)
+				x3cator_state=MANUAL;
+			else
+				x3cator_state=IDLE;
+		}
+
+		if(x3cator_RC.auto_switch ==0 && x3cator_RC.validity==VALID){
+			x3cator_state=MANUAL;
+		}
+
+		if(safety_lidars.zone1 && !x3cator_RC.safety_override || x3cator_PCB.safety_bumper ){
+			x3cator_state=E_STOP;
+		}
+
+		else if(safety_lidars.zone2 && !x3cator_RC.safety_override){
+			x3cator_state=SAFETY_LIMITED;
+		}
+
+
+
+		x3cator_previous_state=AUTONOMOUS;
+
+}
+
+
+void SAFETY_LIMITED_state_update(){
+
+
+	if(x3cator_previous_state==MANUAL){
+		if(x3cator_RC.validity!=VALID)
+			x3cator_state=IDLE;
 	}
 
+	if(x3cator_previous_state==AUTONOMOUS){
+		if(microros_state != MICROROS_STATE_READY || !mission_flag  ){
+		x3cator_state=IDLE;
+		}
+	}
 
+	if(!safety_lidars.zone2 || x3cator_RC.safety_override)
+		x3cator_state=x3cator_previous_state;
 
+	if(safety_lidars.zone1 && !x3cator_RC.safety_override || x3cator_PCB.safety_bumper)
+		x3cator_state=E_STOP;
 
 
 
 }
+
+void E_STOP_state_update(){
+
+
+	if(x3cator_previous_state==MANUAL){
+		if(x3cator_RC.validity!=VALID)
+			x3cator_state=IDLE;
+	}
+
+	if(x3cator_previous_state==AUTONOMOUS){
+		if(microros_state != MICROROS_STATE_READY || !mission_flag  ){
+			x3cator_state=IDLE;
+		}
+	}
+
+	if(!safety_lidars.zone1 || x3cator_RC.safety_override && !x3cator_PCB.safety_bumper )
+		x3cator_state=x3cator_previous_state;
+
+	if(safety_lidars.zone2 && !safety_lidars.zone1 && !x3cator_RC.safety_override )
+		x3cator_state=SAFETY_LIMITED;
+
+}
+
+
+void x3cator_state_update(){
+
+	if(x3cator_state==IDLE)
+	IDLE_state_update();
+
+
+	if(x3cator_state==MANUAL)
+	MANUAL_state_udate();
+
+
+
+	if(x3cator_state==AUTONOMOUS)
+	AUTONOMUS_state_update();
+
+
+	if(x3cator_state==SAFETY_LIMITED){
+	SAFETY_LIMITED_state_update();
+
+	}
+
+	if(x3cator_state==E_STOP)
+	E_STOP_state_update();
+
+}
+
 
 void x3cator_IDLE(){
 
@@ -113,7 +230,8 @@ void x3cator_IDLE(){
 
 
 void x3cator_MANUAL(){
-
+    x3cator_PCB.motordriver1_brake=0;
+    x3cator_PCB.motordriver2_brake=0;
     x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
 	x3cator_PCB.lamp_rear_primary=1;
 	x3cator_PCB.lamp_rear_secondary=0;
@@ -125,9 +243,64 @@ void x3cator_MANUAL(){
 
 }
 
-void x3cator_AUTONOMUS(){};
-void x3cator_SAFETY_LIMITED(){};
-void x3cator_ESTOP(){}
+void x3cator_AUTONOMUS(){
+
+    x3cator_PCB.motordriver1_brake=0;
+    x3cator_PCB.motordriver2_brake=0;
+
+    x3cator_velocityset(vel.linear.x,vel.angular.z);
+	x3cator_PCB.lamp_rear_primary=0;
+	x3cator_PCB.lamp_rear_secondary=1;
+
+	x3cator_PCB.lamp_white=0;
+	x3cator_PCB.lamp_yellow=1;
+
+	x3cator_state_update();
+
+};
+
+float velocity_limit(float max_value,float value){
+	float limited_velocity;
+	if(fabs(value)>max_value)
+	limited_velocity=(value>0)? max_value:-max_value;
+	else
+	limited_velocity=value;
+
+	return limited_velocity;
+}
+
+
+void x3cator_SAFETY_LIMITED(){
+    x3cator_PCB.motordriver1_brake=0;
+    x3cator_PCB.motordriver2_brake=0;
+
+	if(x3cator_previous_state==MANUAL){
+
+		safety_vel_linear=velocity_limit(safety_limit,x3cator_RC.linear_vel);
+        safety_vel_angular=velocity_limit(safety_limit,x3cator_RC.angular_vel);
+	}
+
+	else{
+
+		safety_vel_linear=velocity_limit(safety_limit,vel.linear.x);
+        safety_vel_angular=velocity_limit(safety_limit,vel.angular.z);
+	}
+
+    x3cator_velocityset(safety_vel_linear,safety_vel_angular);
+	x3cator_state_update();
+
+
+};
+
+
+void x3cator_ESTOP(){
+
+    x3cator_PCB.motordriver1_brake=1;
+    x3cator_PCB.motordriver2_brake=1;
+
+	x3cator_velocityset(0,0);
+	x3cator_state_update();
+}
 void x3cator_FAULT(){};
 
 

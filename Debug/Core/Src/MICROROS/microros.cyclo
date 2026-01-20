@@ -1,6 +1,8 @@
-../Core/Src/MICROROS/microros.c:19:11:microros_intitilize	1
-../Core/Src/MICROROS/microros.c:48:6:microros_createnode	1
-../Core/Src/MICROROS/microros.c:60:6:microros_createsubscribers	1
-../Core/Src/MICROROS/microros.c:79:6:microros_createpublishers	1
-../Core/Src/MICROROS/microros.c:91:6:microros_spinnode	1
-../Core/Src/MICROROS/microros.c:99:6:subscription_callback	1
+../Core/Src/MICROROS/microros.c:62:6:microros_createsubscribers	1
+../Core/Src/MICROROS/microros.c:81:6:microros_createpublishers	1
+../Core/Src/MICROROS/microros.c:93:6:microros_spinnode	1
+../Core/Src/MICROROS/microros.c:98:6:subscription_callback	1
+../Core/Src/MICROROS/microros.c:110:6:setup_transport	1
+../Core/Src/MICROROS/microros.c:124:6:microros_cleanup	3
+../Core/Src/MICROROS/microros.c:139:6:microros_init	7
+../Core/Src/MICROROS/microros.c:192:6:microros_recovery	3

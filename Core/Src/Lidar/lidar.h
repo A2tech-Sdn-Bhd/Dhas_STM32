@@ -22,6 +22,8 @@ typedef struct{
 	uint8_t L2DI_2;
 	uint8_t L2DI_3;
 	uint8_t L2DI_4;
+	uint8_t zone1;
+	uint8_t zone2;
 
 
 }lidar_t;

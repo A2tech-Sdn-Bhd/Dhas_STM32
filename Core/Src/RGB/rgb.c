@@ -274,23 +274,23 @@ void WS2812_Start(void) {
 
 RGB_task(void* argument){
 
-//	Set_Animation(2, 3000);
-//	uint32_t last_update = HAL_GetTick();
-//	uint32_t animation_change_timer = HAL_GetTick();
+	Set_Animation(2, 3000);
+	uint32_t last_update = HAL_GetTick();
+	uint32_t animation_change_timer = HAL_GetTick();
 
 	for(;;){
 
-//		uint32_t now = HAL_GetTick();
-//
-//		// Update animation at 60 FPS
-//		if (now - last_update >= 16) {
-//			last_update = now;
-//			Update_Animation();
-//
-//			if (!is_sending) {
-//				WS2812_Start();
-//			}
-//		}
+		uint32_t now = HAL_GetTick();
+
+		// Update animation at 60 FPS
+		if (now - last_update >= 16) {
+			last_update = now;
+			Update_Animation();
+
+			if (!is_sending) {
+				WS2812_Start();
+			}
+		}
 
 
 

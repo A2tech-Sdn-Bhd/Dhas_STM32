@@ -212,7 +212,9 @@ Core/Src/MICROROS/microros.o: ../Core/Src/MICROROS/microros.c \
  ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
  ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
  ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
- ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h ../Core/Src/MAIN/../WDG/wdg.h
+ ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h \
+ ../Core/Src/MAIN/../X3CATOR-S/../MICROROS/microros.h \
+ ../Core/Src/MAIN/../WDG/wdg.h
 ../Core/Src/MICROROS/microros.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/rcl.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/init.h:
@@ -431,4 +433,5 @@ Core/Src/MICROROS/microros.o: ../Core/Src/MICROROS/microros.c \
 ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
 ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
 ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h:
+../Core/Src/MAIN/../X3CATOR-S/../MICROROS/microros.h:
 ../Core/Src/MAIN/../WDG/wdg.h:

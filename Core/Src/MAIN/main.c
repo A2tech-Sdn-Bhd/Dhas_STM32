@@ -70,14 +70,14 @@ int main(void)
 
 
   MX_GPIO_Init();
-//  MX_DMA_Init();
+  MX_DMA_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
   MX_CAN2_Init();
   RC_intialize();
-//  watchdoginit(400,8);
+  watchdoginit(400,8);
 
 
 
@@ -87,44 +87,44 @@ int main(void)
 
 }
 
-rmw_ret_t ros_ok=1;
+rmw_ret_t ros_ok=0;
 uint8_t ros_init=0;
-//uint64_t ok[2];
 void StartmicrorosTask(void *argument)
 {
-//  MX_USB_DEVICE_Init();
-//  microros_intitilize();
-  //wait for microros agent
+	MX_USB_DEVICE_Init();
 
+  while(microros_state !=MICROROS_STATE_READY ){
+  microros_cleanup();
+  microros_init();
+  }
 
-//  rclc_support_fini(&support);
-//
+  microros_createsubscribers();
+  microros_createpublishers();
 
-
+  uint32_t last_ping_time=HAL_GetTick();
+  #define ping_period 250
 
   for(;;)
   {
 
-//    ros_ok=rmw_uros_ping_agent(100, 1);
-//
-//    if(!ros_ok){
-//
-//    	rclc_support_init(&support, 0, NULL, &allocator);
-//    	microros_createnode();
-//    	microros_createsubscribers();
-//    	microros_createpublishers();
-//
-//    }
-//
-//    if(ros_init)
-//    microros_spinnode();
-//	  ok[1]++;
+    if(HAL_GetTick()-last_ping_time > ping_period){
+
+        microros_recovery();
+    	last_ping_time=HAL_GetTick();
+    }
+
+
+
+    if(microros_state == MICROROS_STATE_READY)
+    microros_spinnode();
+
 
     osDelay(10);
   }
 
 }
 
+uint64_t ok;
 void startmainTask(void *argument)
 {
 	CAN2_filterconfig();
@@ -132,6 +132,7 @@ void startmainTask(void *argument)
     x3cator_state=IDLE;
   for(;;)
   {
+	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4,1);
 
 	watchdog();
 
@@ -139,12 +140,12 @@ void startmainTask(void *argument)
 
     x3cator_update();
 
-//    ok[0]++;
+    ok++;
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
 
 
 
-    osDelay(100);
+    osDelay(10);
   }
   /* USER CODE END startmainTask */
 }
@@ -179,6 +180,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+
   }
   /* USER CODE END Error_Handler_Debug */
 }

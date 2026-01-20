@@ -77,7 +77,7 @@ void Freertos_start(void ){
 
 	  microrosTaskHandle = osThreadNew(StartmicrorosTask, NULL, &microrosTask_attributes);
 	  mainTaskHandle = osThreadNew(startmainTask, NULL, &mainTask_attributes);
-//	  RGBTaskHandle = osThreadNew(RGB_task, NULL, &RGBTask_attributes);
+	  RGBTaskHandle = osThreadNew(RGB_task, NULL, &RGBTask_attributes);
 
 
 	  osKernelStart();

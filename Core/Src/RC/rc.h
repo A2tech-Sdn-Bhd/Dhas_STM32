@@ -30,12 +30,12 @@ enum{
 };
 
 
-enum{
+typedef enum{
 	NOT_STARTED,
 	NOT_VALID,
 	VALID,
 	DISCONNECTED
-};
+}rc_validity_t;
 
 
 
@@ -69,7 +69,8 @@ typedef struct{
 	float filtered_angular_vel;
 	float scale;
 	uint8_t auto_switch;
-	uint8_t validity;
+	uint8_t safety_override;
+	rc_validity_t validity;
 }RC_State_t;
 
 

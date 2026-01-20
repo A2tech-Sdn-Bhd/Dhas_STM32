@@ -186,6 +186,7 @@ void RC_update(){
 	x3cator_RC.auto_switch=(rc[SWITCH].pulse<20000)? 0:1;
 	x3cator_RC.linear_vel*=x3cator_speed*x3cator_RC.scale;
 	x3cator_RC.angular_vel*=x3cator_speed*x3cator_RC.scale;
+	x3cator_RC.safety_override=(rc[6].pulse<20000)? 0:1;
 
 
 }

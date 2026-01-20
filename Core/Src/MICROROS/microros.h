@@ -19,6 +19,23 @@
 #include <geometry_msgs/msg/twist.h>
 #include "usb_device.h"
 
+#define MICROROS_INIT_TIMEOUT_MS 5000
+#define MICROROS_RETRY_ATTEMPTS 3
+#define MICROROS_RETRY_DELAY_MS 200
+
+
+typedef enum {
+    MICROROS_STATE_UNINITIALIZED,
+    MICROROS_STATE_TRANSPORT_OK,
+    MICROROS_STATE_AGENT_CONNECTED,
+    MICROROS_STATE_NODE_CREATED,
+	MICROROS_STATE_SUPPORT_INITILIZED,
+    MICROROS_STATE_READY,
+    MICROROS_STATE_ERROR
+} microros_state_t;
+
+extern microros_state_t microros_state;
+
 
 bool cubemx_transport_open(struct uxrCustomTransport * transport);
 bool cubemx_transport_close(struct uxrCustomTransport * transport);
@@ -50,6 +67,8 @@ void microros_createsubscribers(void);
 void microros_createpublishers(void);
 void microros_spinnode(void);
 void subscription_callback();
+void microros_cleanup(void);
+void microros_recovery(void);
 
 
 #endif /* SRC_MICROROS_MICROROS_H_ */
