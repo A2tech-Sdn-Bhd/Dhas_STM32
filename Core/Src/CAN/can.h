@@ -27,12 +27,14 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "../X3CATOR-S/x3cator.h"
 
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
 extern CAN_HandleTypeDef hcan2;
+extern CAN_RxHeaderTypeDef CANRxMessage;
 
 /* USER CODE BEGIN Private defines */
 

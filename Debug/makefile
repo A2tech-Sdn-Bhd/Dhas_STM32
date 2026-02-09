@@ -32,6 +32,7 @@ RM := rm -rf
 -include Core/Src/Freertos/subdir.mk
 -include Core/Src/DMA/subdir.mk
 -include Core/Src/CAN/subdir.mk
+-include Core/Src/ADC/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 

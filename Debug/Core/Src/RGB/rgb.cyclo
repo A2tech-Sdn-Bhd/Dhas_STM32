@@ -9,9 +9,9 @@
 ../Core/Src/RGB/rgb.c:143:6:Anim_Sparkle	3
 ../Core/Src/RGB/rgb.c:162:6:Anim_Wave	2
 ../Core/Src/RGB/rgb.c:177:6:Update_Animation	8
-../Core/Src/RGB/rgb.c:211:6:Set_Animation	1
-../Core/Src/RGB/rgb.c:220:6:Fill_Buffer	5
-../Core/Src/RGB/rgb.c:242:6:HAL_TIM_PWM_PulseFinishedHalfCpltCallback	2
-../Core/Src/RGB/rgb.c:249:6:HAL_TIM_PWM_PulseFinishedCallback	3
-../Core/Src/RGB/rgb.c:261:6:WS2812_Start	2
-../Core/Src/RGB/rgb.c:275:1:RGB_task	3
+../Core/Src/RGB/rgb.c:211:6:Set_Animation	2
+../Core/Src/RGB/rgb.c:224:6:Fill_Buffer	5
+../Core/Src/RGB/rgb.c:246:6:HAL_TIM_PWM_PulseFinishedHalfCpltCallback	2
+../Core/Src/RGB/rgb.c:253:6:HAL_TIM_PWM_PulseFinishedCallback	3
+../Core/Src/RGB/rgb.c:265:6:WS2812_Start	2
+../Core/Src/RGB/rgb.c:279:1:RGB_task	3

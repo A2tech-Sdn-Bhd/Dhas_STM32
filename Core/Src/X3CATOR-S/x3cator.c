@@ -14,6 +14,7 @@ PCB_t x3cator_PCB;
 x3cator_state_t x3cator_state;
 x3cator_state_t x3cator_previous_state;
 uint8_t mission_flag;
+x3cator_encoder x3cator_rpm;
 float wr,wl;
 float safety_vel_linear,safety_vel_angular;
 
@@ -23,8 +24,8 @@ void x3cator_velocityset(float linear,float angular){
 	wr=(linear-angular);
 
 
-	speedR=wr*30/(M_PI*Wheel_radius);
-	speedL=wl*30/(M_PI*Wheel_radius);
+	speedR=wr*30/(M_PI*Wheel_radius)*30;
+	speedL=wl*30/(M_PI*Wheel_radius)*30;
 	if(fabs(speedR)<5)
 	speedR=0;
 	if(fabs(speedL)<5)
@@ -53,6 +54,9 @@ void x3cator_velocityset(float linear,float angular){
 
 
 }
+
+
+
 
 void x3cator_pin_update(){
 
@@ -87,6 +91,7 @@ void IDLE_state_update(){
 
 		if(microros_state == MICROROS_STATE_READY && mission_flag)
 			x3cator_state=AUTONOMOUS;
+
 
 
 }
@@ -260,7 +265,9 @@ void x3cator_AUTONOMUS(){
 };
 
 float velocity_limit(float max_value,float value){
+
 	float limited_velocity;
+
 	if(fabs(value)>max_value)
 	limited_velocity=(value>0)? max_value:-max_value;
 	else
@@ -328,5 +335,28 @@ void x3cator_update(){
 
 	else
 		x3cator_FAULT();
+
+    x3cator_request_encoder_rpm();
+
+}
+
+
+
+
+void x3cator_request_encoder_rpm(){
+
+	uint8_t encoder_request[8];
+	encoder_request[0]=0x40;encoder_request[1]=0x03;encoder_request[2]=0x21;encoder_request[3]=1;
+
+	CAN2_Sendstandard_message(0x601,encoder_request);
+	encoder_request[3]=2;
+	CAN2_Sendstandard_message(0x601,encoder_request);
+
+	encoder_request[3]=1;
+	CAN2_Sendstandard_message(0x602,encoder_request);
+	encoder_request[3]=2;
+	CAN2_Sendstandard_message(0x602,encoder_request);
+
+
 
 }

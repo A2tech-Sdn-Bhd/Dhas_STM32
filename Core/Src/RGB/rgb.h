@@ -51,6 +51,7 @@ typedef struct {
     uint32_t duration;      // Duration for one cycle in ms
     float phase;            // Current phase (0.0 to 1.0)
     uint8_t speed;          // Speed multiplier (1-10)
+
 } AnimationState;
 
 AnimationState anim_state = {
@@ -62,7 +63,7 @@ AnimationState anim_state = {
 };
 
 
-
+void Set_Animation(AnimationType type, uint32_t duration);
 
 
 

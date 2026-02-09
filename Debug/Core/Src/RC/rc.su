@@ -4,5 +4,5 @@
 ../Core/Src/RC/rc.c:63:6:HAL_TIM_IC_CaptureCallback	16	static
 ../Core/Src/RC/rc.c:110:6:Channel_handler	24	static
 ../Core/Src/RC/rc.c:137:6:RC_intialize	8	static
-../Core/Src/RC/rc.c:177:6:RC_update	16	static
+../Core/Src/RC/rc.c:177:6:RC_update	8	static
 ../Core/Src/RC/rc.c:195:6:RC_state_check	8	static

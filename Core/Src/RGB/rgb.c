@@ -113,7 +113,7 @@ void Anim_Breathing(float phase) {
 
     for (int i = 0; i < NUM_LEDS; i++) {
         // Can use any color - using cyan here
-        led_colors[i].r = 0;
+        led_colors[i].r = brightness;
         led_colors[i].g = brightness;
         led_colors[i].b = brightness;
     }
@@ -209,6 +209,10 @@ void Update_Animation(void) {
 
 // Change animation mode
 void Set_Animation(AnimationType type, uint32_t duration) {
+
+	if(type == anim_state.type)
+	return ;
+
     anim_state.type = type;
     anim_state.duration = duration;
     anim_state.start_time = HAL_GetTick();
@@ -270,17 +274,18 @@ void WS2812_Start(void) {
     HAL_TIM_PWM_Start_DMA(&htim5, TIM_CHANNEL_3, pwm_buffer, BUFF_LEN);
 }
 
-
+uint8_t animation_type;
 
 RGB_task(void* argument){
 
-	Set_Animation(2, 3000);
+	Set_Animation(ANIM_CHASE, 3000);
 	uint32_t last_update = HAL_GetTick();
 	uint32_t animation_change_timer = HAL_GetTick();
 
 	for(;;){
 
 		uint32_t now = HAL_GetTick();
+		Set_Animation(animation_type, 3000);
 
 		// Update animation at 60 FPS
 		if (now - last_update >= 16) {

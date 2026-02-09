@@ -58,7 +58,7 @@
 
 #include "main.h"
 
-
+uint16_t AD_RES;
 int main(void)
 {
 
@@ -77,7 +77,9 @@ int main(void)
   MX_TIM5_Init();
   MX_CAN2_Init();
   RC_intialize();
-  watchdoginit(400,8);
+  MX_ADC1_Init();
+  HAL_ADC_Start_DMA(&hadc1, &AD_RES, 1);
+  watchdoginit(4000,8);
 
 
 
@@ -125,26 +127,45 @@ void StartmicrorosTask(void *argument)
 }
 
 uint64_t ok;
+
+uint8_t battery_request[8];
+uint32_t tick;
+
+float distance;
 void startmainTask(void *argument)
 {
 	CAN2_filterconfig();
 	HAL_CAN_Start(&hcan2);
+
+	HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
+
     x3cator_state=IDLE;
+
+    tick=HAL_GetTick();
   for(;;)
   {
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4,1);
+    distance= AD_RES/4095.0 * 2.0 ;
+
+
 
 	watchdog();
 
 	RC_update();
 
+	battery_request[0]=0x5A;
+	if(HAL_GetTick()-tick>400){
+	CAN2_Sendstandard_message(0x100,battery_request);
+	tick=HAL_GetTick();
+	}
+
     x3cator_update();
 
-    ok++;
     HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
 
 
 
+    ok++;
     osDelay(10);
   }
   /* USER CODE END startmainTask */

@@ -36,6 +36,7 @@ extern "C" {
 #include "../RC/rc.h"
 #include "../X3CATOR-S/x3cator.h"
 #include "../WDG/wdg.h"
+#include "../ADC/adc.h"
 
 
 //#include "microros.h"

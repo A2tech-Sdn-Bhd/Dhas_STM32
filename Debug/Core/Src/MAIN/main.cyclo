@@ -1,5 +1,5 @@
 ../Core/Src/MAIN/main.c:62:5:main	1
-../Core/Src/MAIN/main.c:92:6:StartmicrorosTask	4
-../Core/Src/MAIN/main.c:128:6:startmainTask	1
-../Core/Src/MAIN/main.c:158:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/MAIN/main.c:176:6:Error_Handler	1
+../Core/Src/MAIN/main.c:94:6:StartmicrorosTask	4
+../Core/Src/MAIN/main.c:135:6:startmainTask	2
+../Core/Src/MAIN/main.c:179:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/MAIN/main.c:197:6:Error_Handler	1

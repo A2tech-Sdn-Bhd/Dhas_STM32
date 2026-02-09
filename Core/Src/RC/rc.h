@@ -12,7 +12,7 @@
 #include "../TIMER/tim.h"
 #include "../GPIO/gpio.h"
 #include "../Moving_average/movg.h"
-#define x3cator_speed 3.0
+#define x3cator_speed 1.0
 
 
 

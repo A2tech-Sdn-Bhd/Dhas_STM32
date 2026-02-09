@@ -191,6 +191,9 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
@@ -204,19 +207,21 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../Core/Src/MAIN/../CAN/can.h ../Core/Src/MAIN/../TIMER/tim.h \
- ../Core/Src/MAIN/../TIMER/../DMA/dma.h ../Core/Src/MAIN/../GPIO/gpio.h \
- ../Core/Src/MAIN/../RC/rc.h ../Core/Src/MAIN/../RC/../TIMER/tim.h \
- ../Core/Src/MAIN/../RC/../GPIO/gpio.h \
- ../Core/Src/MAIN/../RC/../Moving_average/movg.h \
- ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
- ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h \
- ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
- ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
- ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
- ../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h \
- ../Core/Src/MAIN/../X3CATOR-S/../MICROROS/microros.h \
- ../Core/Src/MAIN/../WDG/wdg.h \
+ ../Core/Src/MAIN/../CAN/can.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/x3cator.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../CAN/can.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/lidar.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/rc.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../TIMER/tim.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../TIMER/../DMA/dma.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../Moving_average/movg.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../MICROROS/microros.h \
+ ../Core/Src/MAIN/../TIMER/tim.h ../Core/Src/MAIN/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../RC/rc.h ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
+ ../Core/Src/MAIN/../WDG/wdg.h ../Core/Src/MAIN/../ADC/adc.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
@@ -412,6 +417,9 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
@@ -426,21 +434,23 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
 ../Core/Src/MAIN/../CAN/can.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/x3cator.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../CAN/can.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../GPIO/gpio.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/lidar.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/rc.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../TIMER/tim.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../TIMER/../DMA/dma.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../GPIO/gpio.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/../Moving_average/movg.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../MICROROS/microros.h:
 ../Core/Src/MAIN/../TIMER/tim.h:
-../Core/Src/MAIN/../TIMER/../DMA/dma.h:
 ../Core/Src/MAIN/../GPIO/gpio.h:
 ../Core/Src/MAIN/../RC/rc.h:
-../Core/Src/MAIN/../RC/../TIMER/tim.h:
-../Core/Src/MAIN/../RC/../GPIO/gpio.h:
-../Core/Src/MAIN/../RC/../Moving_average/movg.h:
 ../Core/Src/MAIN/../X3CATOR-S/x3cator.h:
-../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h:
-../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h:
-../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
-../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
-../Core/Src/MAIN/../X3CATOR-S/../RC/rc.h:
-../Core/Src/MAIN/../X3CATOR-S/../MICROROS/microros.h:
 ../Core/Src/MAIN/../WDG/wdg.h:
+../Core/Src/MAIN/../ADC/adc.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:

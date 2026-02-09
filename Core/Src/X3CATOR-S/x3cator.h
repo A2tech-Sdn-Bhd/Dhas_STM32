@@ -58,7 +58,18 @@ typedef struct{
 	uint8_t motordriver2_enable;
 	uint8_t motordriver2_brake;
 
+
 }PCB_t;
+
+
+typedef struct{
+
+	int16_t front_left_motor;
+	int16_t front_right_motor;
+	int16_t back_left_motor;
+	int16_t back_right_motor;
+
+}x3cator_encoder;
 
 
 
@@ -68,11 +79,13 @@ extern PCB_t x3cator_PCB;
 extern uint8_t mission_flag;
 extern x3cator_state_t x3cator_state;
 extern x3cator_state_t x3cator_previous_state;
+extern x3cator_encoder x3cator_rpm;
 
 //extern float speedL,speedR;
 //extern float wr,wl;
 
 void x3cator_velocityset(float linear,float angular);
+void x3cator_request_encoder_rpm();
 
 void x3cator_update();
 #endif /* SRC_X3CATOR_S_X3CATOR_H_ */

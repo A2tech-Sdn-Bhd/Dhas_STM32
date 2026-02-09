@@ -25,6 +25,7 @@
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan2;
+CAN_RxHeaderTypeDef CANRxMessage;
 
 /* CAN2 init function */
 
@@ -47,6 +48,7 @@ void CAN2_filterconfig(void)
 
 
 	HAL_CAN_ConfigFilter(&hcan2, &filter);
+
 
 }
 
@@ -77,7 +79,7 @@ void MX_CAN2_Init(void)
 
   /* USER CODE END CAN2_Init 1 */
   hcan2.Instance = CAN2;
-  hcan2.Init.Prescaler = 12;
+  hcan2.Init.Prescaler = 6;
   hcan2.Init.Mode = CAN_MODE_NORMAL;
   hcan2.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan2.Init.TimeSeg1 = CAN_BS1_11TQ;
@@ -162,26 +164,74 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 /* USER CODE BEGIN 1 */
 
+uint8_t data[8];
+uint8_t can_recieved;
 
 
+typedef struct {
+    float TotalVoltage_V;
+    float Current_A;
+    float Capacity_Ah;
+} BMS_Data_t;
+
+BMS_Data_t bmsData;
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 
 
 
+    if(hcan == &hcan2){
+    	HAL_CAN_GetRxMessage(&hcan2, CAN_RX_FIFO0, &CANRxMessage, data);
+
+
+    	if(CANRxMessage.StdId == 0x581){
+
+    		if(data[1]==0x03 && data[3]==1)
+    		x3cator_rpm.front_left_motor= (data[4])| (data[5]<<8);
+
+    		else if(data[1]==0x03 && data[3]==2)
+    		x3cator_rpm.front_right_motor= (data[4])| (data[5]<<8);
+
+    	}
+
+
+    	else if(CANRxMessage.StdId == 0x582){
+
+    		if(data[1]==0x03 && data[3]==1)
+    		x3cator_rpm.back_left_motor= (data[4])| (data[5]<<8);
+
+    		else if(data[1]==0x03 && data[3]==2)
+    		x3cator_rpm.back_right_motor= (data[4])| (data[5]<<8);
+
+    	}
+
+    	else if(CANRxMessage.StdId == 0x100){
+
+    		// Unit 10mV
+    		uint16_t rawVolt = (data[0] << 8) | data[1];
+    		bmsData.TotalVoltage_V = rawVolt * 0.01f;
+
+    		// --- Parse Current (Bytes 2-3) ---
+    		// Unit 10mA, Signed
+    		int16_t rawCurr = (int16_t)((data[2] << 8) | data[3]);
+    		bmsData.Current_A = rawCurr * 0.01f;
+
+    		// --- Parse Capacity (Bytes 4-5) ---
+    		// Unit 10mAh
+    		uint16_t rawCap = (data[4] << 8) | data[5];
+    		bmsData.Capacity_Ah = rawCap * 0.01f;
+    	}
 
 
 
+        can_recieved++;
 
 
 
+    }
 
 
-
-
-
-
-
+	HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
 
 
 }
