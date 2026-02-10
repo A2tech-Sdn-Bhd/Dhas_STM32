@@ -186,21 +186,21 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 
     	if(CANRxMessage.StdId == 0x581){
 
-    		if(data[1]==0x03 && data[3]==1)
-    		x3cator_rpm.front_left_motor= (data[4])| (data[5]<<8);
+    		if(data[1]==0x04 && data[3]==1)
+    		x3cator_rpm.front_right_motor= (data[4])| (data[5]<<8) | (data[6]<<16) | (data[7]<<24);
 
-    		else if(data[1]==0x03 && data[3]==2)
-    		x3cator_rpm.front_right_motor= (data[4])| (data[5]<<8);
+    		else if(data[1]==0x04 && data[3]==2)
+    		x3cator_rpm.front_left_motor= (data[4])| (data[5]<<8) | (data[6]<<16) | (data[7]<<24);
 
     	}
 
 
     	else if(CANRxMessage.StdId == 0x582){
 
-    		if(data[1]==0x03 && data[3]==1)
-    		x3cator_rpm.back_left_motor= (data[4])| (data[5]<<8);
+    		if(data[1]==0x04 && data[3]==1)
+    		x3cator_rpm.back_left_motor= (data[4])| (data[5]<<8) | (data[6]<<16) | (data[7]<<24);
 
-    		else if(data[1]==0x03 && data[3]==2)
+    		else if(data[1]==0x04 && data[3]==2)
     		x3cator_rpm.back_right_motor= (data[4])| (data[5]<<8);
 
     	}

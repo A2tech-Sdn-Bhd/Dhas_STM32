@@ -65,6 +65,12 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9
                           |GPIO_PIN_11|GPIO_PIN_12, GPIO_PIN_RESET);
 
+  HAL_GPIO_WritePin(GPIOE,GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5
+          |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_11|GPIO_PIN_0
+          |GPIO_PIN_1, GPIO_PIN_RESET);
+
+
+
   /*Configure GPIO pins : PE2 PE3 PE4 PE5
                            PE6 PE7 PE11 PE0
                            PE1 */

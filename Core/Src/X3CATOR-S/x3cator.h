@@ -13,7 +13,9 @@
 #include "../RC/rc.h"
 #include "../MICROROS/microros.h"
 #define Distance_wheel_center 0.475
-#define Wheel_radius  0.355/2.0
+#define Wheel_radius  (0.355/2.0)
+#define wheel_base   0.89813
+#define gear_ratio  30.0
 #define safety_limit 0.5
 
 
@@ -64,8 +66,8 @@ typedef struct{
 
 typedef struct{
 
-	int16_t front_left_motor;
-	int16_t front_right_motor;
+	int32_t front_left_motor;
+	int32_t front_right_motor;
 	int16_t back_left_motor;
 	int16_t back_right_motor;
 

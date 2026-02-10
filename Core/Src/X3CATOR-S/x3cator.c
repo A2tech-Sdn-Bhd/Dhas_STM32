@@ -18,18 +18,26 @@ x3cator_encoder x3cator_rpm;
 float wr,wl;
 float safety_vel_linear,safety_vel_angular;
 
+
+
+
 void x3cator_velocityset(float linear,float angular){
 
-	wl=(linear+angular);
-	wr=(linear-angular);
+     wl = (linear - (angular * wheel_base / 2.0)) / Wheel_radius;
+     wr = (linear + (angular * wheel_base / 2.0)) / Wheel_radius;
+
+//	wl=(linear+angular);
+//	wr=(linear-angular);
 
 
-	speedR=wr*30/(M_PI*Wheel_radius)*30;
-	speedL=wl*30/(M_PI*Wheel_radius)*30;
-	if(fabs(speedR)<5)
+	speedR=(wr*60/(2*M_PI))*gear_ratio;
+	speedL=(wl*60/(2*M_PI))*gear_ratio;
+
+	if(fabs(speedR)<150)
 	speedR=0;
-	if(fabs(speedL)<5)
+	if(fabs(speedL)<150)
 	speedL=0;
+
 	backmotor_data[0] = 0x23; backmotor_data[1] = 0x02; backmotor_data[2] = 0x20;
 	frontmotor_data[0] = 0x23; frontmotor_data[1] = 0x02; frontmotor_data[2] = 0x20;
 
@@ -208,10 +216,10 @@ void x3cator_state_update(){
 	AUTONOMUS_state_update();
 
 
-	if(x3cator_state==SAFETY_LIMITED){
+	if(x3cator_state==SAFETY_LIMITED)
 	SAFETY_LIMITED_state_update();
 
-	}
+
 
 	if(x3cator_state==E_STOP)
 	E_STOP_state_update();
@@ -235,6 +243,7 @@ void x3cator_IDLE(){
 
 
 void x3cator_MANUAL(){
+
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
     x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
@@ -308,7 +317,17 @@ void x3cator_ESTOP(){
 	x3cator_velocityset(0,0);
 	x3cator_state_update();
 }
-void x3cator_FAULT(){};
+
+
+void x3cator_FAULT(){
+
+    x3cator_PCB.motordriver1_brake=1;
+    x3cator_PCB.motordriver2_brake=1;
+
+	x3cator_velocityset(0,0);
+	x3cator_state_update();
+
+};
 
 
 
@@ -336,7 +355,7 @@ void x3cator_update(){
 	else
 		x3cator_FAULT();
 
-    x3cator_request_encoder_rpm();
+	x3cator_request_encoder_rpm();
 
 }
 
@@ -346,7 +365,7 @@ void x3cator_update(){
 void x3cator_request_encoder_rpm(){
 
 	uint8_t encoder_request[8];
-	encoder_request[0]=0x40;encoder_request[1]=0x03;encoder_request[2]=0x21;encoder_request[3]=1;
+	encoder_request[0]=0x40;encoder_request[1]=0x04;encoder_request[2]=0x21;encoder_request[3]=1;
 
 	CAN2_Sendstandard_message(0x601,encoder_request);
 	encoder_request[3]=2;
