@@ -23,8 +23,8 @@ float safety_vel_linear,safety_vel_angular;
 
 void x3cator_velocityset(float linear,float angular){
 
-     wl = (linear - (angular * wheel_base / 2.0)) / Wheel_radius;
-     wr = (linear + (angular * wheel_base / 2.0)) / Wheel_radius;
+     wl = (linear + (angular * wheel_base / 2.0)) / Wheel_radius;
+     wr = (linear - (angular * wheel_base / 2.0)) / Wheel_radius;
 
 //	wl=(linear+angular);
 //	wr=(linear-angular);
@@ -63,6 +63,16 @@ void x3cator_velocityset(float linear,float angular){
 
 }
 
+void x3cator_velocity_fromRPM(float* linear_velocity,float* angular_velocity){
+
+	float wr=x3cator_rpm.front_right_motor/gear_ratio/60.0*2*M_PI;
+	float wl=-x3cator_rpm.back_left_motor/gear_ratio/60.0*2*M_PI;
+
+	*linear_velocity=(wl+wr)*Wheel_radius/2 ;
+	*angular_velocity=(wl-wr)*Wheel_radius/wheel_base;
+
+}
+
 
 
 
@@ -82,7 +92,7 @@ void x3cator_pin_update(){
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2,!x3cator_PCB.lamp_rear_primary);
 	HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3,!x3cator_PCB.lamp_rear_secondary);
 
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10,x3cator_PCB.standby1);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10,x3cator_PCB.buzzer);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13,x3cator_PCB.standby2);
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_12,x3cator_PCB.standby3);
 
@@ -94,10 +104,10 @@ void x3cator_pin_update(){
 void IDLE_state_update(){
 
 
-		if(x3cator_RC.validity==VALID && x3cator_RC.auto_switch ==0)
+		if(x3cator_RC.validity==VALID && x3cator_RC.auto_switch ==0 || ros_control_flags.ros_manual)
 			x3cator_state=MANUAL;
 
-		if(microros_state == MICROROS_STATE_READY && mission_flag)
+		if(microros_state == MICROROS_STATE_READY && ros_control_flags.auto_mode)
 			x3cator_state=AUTONOMOUS;
 
 
@@ -106,17 +116,17 @@ void IDLE_state_update(){
 
 void MANUAL_state_udate(){
 
-		if(x3cator_RC.validity!=VALID)
+		if(x3cator_RC.validity!=VALID && !ros_control_flags.ros_manual )
 		x3cator_state=IDLE;
 
-		if(x3cator_RC.auto_switch ==1 && microros_state == MICROROS_STATE_READY && mission_flag)
+		if(x3cator_RC.auto_switch ==1 && microros_state == MICROROS_STATE_READY && ros_control_flags.auto_mode)
 			x3cator_state=AUTONOMOUS;
 
-		if(safety_lidars.zone1 && !x3cator_RC.safety_override || x3cator_PCB.safety_bumper ){
+		if(safety_lidars.E_STOP && !safety_lidars.override || x3cator_PCB.safety_bumper ){
 			x3cator_state=E_STOP;
 		}
 
-		else if(safety_lidars.zone2 && !x3cator_RC.safety_override){
+		else if(safety_lidars.Safety_limited && !safety_lidars.override){
 			x3cator_state=SAFETY_LIMITED;
 		}
 
@@ -127,7 +137,7 @@ void MANUAL_state_udate(){
 
 void AUTONOMUS_state_update(){
 
-		if(microros_state != MICROROS_STATE_READY || !mission_flag  ){
+		if(microros_state != MICROROS_STATE_READY || !ros_control_flags.auto_mode  ){
 
 			if(x3cator_RC.validity==VALID)
 				x3cator_state=MANUAL;
@@ -139,11 +149,11 @@ void AUTONOMUS_state_update(){
 			x3cator_state=MANUAL;
 		}
 
-		if(safety_lidars.zone1 && !x3cator_RC.safety_override || x3cator_PCB.safety_bumper ){
+		if(safety_lidars.E_STOP && !safety_lidars.override || x3cator_PCB.safety_bumper ){
 			x3cator_state=E_STOP;
 		}
 
-		else if(safety_lidars.zone2 && !x3cator_RC.safety_override){
+		else if(safety_lidars.Safety_limited && !safety_lidars.override){
 			x3cator_state=SAFETY_LIMITED;
 		}
 
@@ -158,20 +168,20 @@ void SAFETY_LIMITED_state_update(){
 
 
 	if(x3cator_previous_state==MANUAL){
-		if(x3cator_RC.validity!=VALID)
+		if(x3cator_RC.validity!=VALID && !ros_control_flags.ros_manual )
 			x3cator_state=IDLE;
 	}
 
 	if(x3cator_previous_state==AUTONOMOUS){
-		if(microros_state != MICROROS_STATE_READY || !mission_flag  ){
+		if(microros_state != MICROROS_STATE_READY || !ros_control_flags.auto_mode  ){
 		x3cator_state=IDLE;
 		}
 	}
 
-	if(!safety_lidars.zone2 || x3cator_RC.safety_override)
+	if(!safety_lidars.Safety_limited || safety_lidars.override)
 		x3cator_state=x3cator_previous_state;
 
-	if(safety_lidars.zone1 && !x3cator_RC.safety_override || x3cator_PCB.safety_bumper)
+	if(safety_lidars.E_STOP && !safety_lidars.override || x3cator_PCB.safety_bumper)
 		x3cator_state=E_STOP;
 
 
@@ -182,20 +192,20 @@ void E_STOP_state_update(){
 
 
 	if(x3cator_previous_state==MANUAL){
-		if(x3cator_RC.validity!=VALID)
+		if(x3cator_RC.validity!=VALID && !ros_control_flags.ros_manual)
 			x3cator_state=IDLE;
 	}
 
 	if(x3cator_previous_state==AUTONOMOUS){
-		if(microros_state != MICROROS_STATE_READY || !mission_flag  ){
+		if(microros_state != MICROROS_STATE_READY || !ros_control_flags.auto_mode  ){
 			x3cator_state=IDLE;
 		}
 	}
 
-	if(!safety_lidars.zone1 || x3cator_RC.safety_override && !x3cator_PCB.safety_bumper )
+	if((!safety_lidars.E_STOP || safety_lidars.override) && !x3cator_PCB.safety_bumper )
 		x3cator_state=x3cator_previous_state;
 
-	if(safety_lidars.zone2 && !safety_lidars.zone1 && !x3cator_RC.safety_override )
+	if(safety_lidars.Safety_limited && !safety_lidars.E_STOP && !safety_lidars.override && !x3cator_PCB.safety_bumper)
 		x3cator_state=SAFETY_LIMITED;
 
 }
@@ -235,6 +245,7 @@ void x3cator_IDLE(){
 
 	x3cator_PCB.lamp_white=0;
 	x3cator_PCB.lamp_yellow=0;
+	x3cator_PCB.buzzer=0;
 
 	x3cator_state_update();
 
@@ -246,7 +257,13 @@ void x3cator_MANUAL(){
 
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
-    x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
+	x3cator_PCB.buzzer=0;
+
+    if(ros_control_flags.ros_manual && x3cator_RC.validity != VALID)
+    	x3cator_velocityset(vel.linear.x,vel.angular.z);
+    else
+    	x3cator_velocityset(x3cator_RC.linear_vel,x3cator_RC.angular_vel);
+
 	x3cator_PCB.lamp_rear_primary=1;
 	x3cator_PCB.lamp_rear_secondary=0;
 
@@ -261,6 +278,8 @@ void x3cator_AUTONOMUS(){
 
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
+	x3cator_PCB.buzzer=0;
+
 
     x3cator_velocityset(vel.linear.x,vel.angular.z);
 	x3cator_PCB.lamp_rear_primary=0;
@@ -287,20 +306,24 @@ float velocity_limit(float max_value,float value){
 
 
 void x3cator_SAFETY_LIMITED(){
+
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
+	x3cator_PCB.buzzer=0;
 
-	if(x3cator_previous_state==MANUAL){
 
-		safety_vel_linear=velocity_limit(safety_limit,x3cator_RC.linear_vel);
-        safety_vel_angular=velocity_limit(safety_limit,x3cator_RC.angular_vel);
-	}
+    if(x3cator_previous_state==MANUAL && x3cator_RC.validity == VALID){
 
-	else{
+    	safety_vel_linear=velocity_limit(safety_limit,x3cator_RC.linear_vel);
+    	safety_vel_angular=velocity_limit(safety_limit,x3cator_RC.angular_vel);
 
-		safety_vel_linear=velocity_limit(safety_limit,vel.linear.x);
-        safety_vel_angular=velocity_limit(safety_limit,vel.angular.z);
-	}
+    }
+
+    else{
+
+    	safety_vel_linear=velocity_limit(safety_limit,vel.linear.x);
+    	safety_vel_angular=velocity_limit(safety_limit,vel.angular.z);
+    }
 
     x3cator_velocityset(safety_vel_linear,safety_vel_angular);
 	x3cator_state_update();
@@ -313,6 +336,7 @@ void x3cator_ESTOP(){
 
     x3cator_PCB.motordriver1_brake=1;
     x3cator_PCB.motordriver2_brake=1;
+	x3cator_PCB.buzzer=1;
 
 	x3cator_velocityset(0,0);
 	x3cator_state_update();
@@ -356,6 +380,7 @@ void x3cator_update(){
 		x3cator_FAULT();
 
 	x3cator_request_encoder_rpm();
+	x3caotr_RGB_update();
 
 }
 
@@ -365,7 +390,7 @@ void x3cator_update(){
 void x3cator_request_encoder_rpm(){
 
 	uint8_t encoder_request[8];
-	encoder_request[0]=0x40;encoder_request[1]=0x04;encoder_request[2]=0x21;encoder_request[3]=1;
+	encoder_request[0]=0x40;encoder_request[1]=0x03;encoder_request[2]=0x21;encoder_request[3]=1;
 
 	CAN2_Sendstandard_message(0x601,encoder_request);
 	encoder_request[3]=2;
@@ -375,6 +400,74 @@ void x3cator_request_encoder_rpm(){
 	CAN2_Sendstandard_message(0x602,encoder_request);
 	encoder_request[3]=2;
 	CAN2_Sendstandard_message(0x602,encoder_request);
+
+
+
+}
+
+
+void x3cator_battery_request(){
+
+	uint8_t battery_request=0x5A;
+	CAN2_Sendstandard_message(0x100,&battery_request);
+
+
+}
+
+void x3caotr_RGB_update(){
+
+	if(x3cator_state == IDLE){
+
+		anim_state.type= ANIM_BREATHING;
+		anim_state.duration=2500;
+
+	}
+	else if(x3cator_state == MANUAL){
+
+		anim_state.type= ANIM_SOLID;
+		anim_state.red=0;
+		anim_state.blue=150;
+		anim_state.green=150;
+	}
+	else if(x3cator_state == AUTONOMOUS){
+
+		anim_state.type= ANIM_SOLID;
+		anim_state.red=0;
+		anim_state.blue=0;
+		anim_state.green=255;
+
+	}
+
+	else if(x3cator_state == SAFETY_LIMITED){
+
+		anim_state.type= ANIM_FLASH;
+		anim_state.red=255;
+		anim_state.blue=0;
+		anim_state.green=255;
+		anim_state.duration=500;
+
+	}
+	else if(x3cator_state == E_STOP){
+
+		anim_state.type= ANIM_FLASH;
+		anim_state.red=255;
+		anim_state.blue=0;
+		anim_state.green=0;
+		anim_state.duration=100;
+
+	}
+	else {
+
+		anim_state.type= ANIM_SOS;
+		anim_state.red=255;
+		anim_state.blue=0;
+		anim_state.green=0;
+		anim_state.duration=5400;
+
+	}
+
+
+
 
 
 

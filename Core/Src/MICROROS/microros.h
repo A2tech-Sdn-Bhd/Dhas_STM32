@@ -15,9 +15,16 @@
 #include <uxr/client/transport.h>
 #include <rmw_microxrcedds_c/config.h>
 #include <rmw_microros/rmw_microros.h>
-#include <std_msgs/msg/int32.h>
+
 #include <geometry_msgs/msg/twist.h>
+#include <std_msgs/msg/bool.h>
 #include "usb_device.h"
+
+#include <dhas_stm32_interfaces/msg/stm32_encoder.h>
+#include <dhas_stm32_interfaces/msg/stm32_battery.h>
+#include <dhas_stm32_interfaces/msg/stm32_state.h>
+#include <dhas_stm32_interfaces/msg/stm32_safety.h>
+#include <dhas_stm32_interfaces/msg/stm32_control.h>
 
 #define MICROROS_INIT_TIMEOUT_MS 5000
 #define MICROROS_RETRY_ATTEMPTS 3
@@ -30,6 +37,7 @@ typedef enum {
     MICROROS_STATE_AGENT_CONNECTED,
     MICROROS_STATE_NODE_CREATED,
 	MICROROS_STATE_SUPPORT_INITILIZED,
+	MICRORS_STATE_EXECUTAR_INITILIZED,
     MICROROS_STATE_READY,
     MICROROS_STATE_ERROR
 } microros_state_t;
@@ -57,6 +65,13 @@ extern rcl_allocator_t allocator;
 extern rcl_node_t node;
 extern rclc_executor_t executor;
 extern geometry_msgs__msg__Twist vel;
+extern rcl_publisher_t encoder_publisher;
+extern rcl_publisher_t safety_publisher;
+extern rcl_publisher_t status_publisher;
+extern rcl_publisher_t battery_publisher;
+extern dhas_stm32_interfaces__msg__Stm32Control ros_control_flags;
+
+
 
 
 
@@ -67,8 +82,14 @@ void microros_createsubscribers(void);
 void microros_createpublishers(void);
 void microros_spinnode(void);
 void subscription_callback();
+void reset_subscription_callback();
 void microros_cleanup(void);
 void microros_recovery(void);
+
+void microros_encoder_publish(void);
+void microros_battery_publish(void);
+void microros_state_publish(void);
+void microros_safety_publish(void);
 
 
 #endif /* SRC_MICROROS_MICROROS_H_ */

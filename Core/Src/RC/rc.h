@@ -12,7 +12,7 @@
 #include "../TIMER/tim.h"
 #include "../GPIO/gpio.h"
 #include "../Moving_average/movg.h"
-#define x3cator_speed 1.0
+#define x3cator_speed 1.5
 
 
 
@@ -71,6 +71,7 @@ typedef struct{
 	uint8_t auto_switch;
 	uint8_t safety_override;
 	rc_validity_t validity;
+	uint8_t RC_reset;
 }RC_State_t;
 
 

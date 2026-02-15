@@ -12,6 +12,7 @@
 #include "../Lidar/lidar.h"
 #include "../RC/rc.h"
 #include "../MICROROS/microros.h"
+#include "../RGB/rgb.h"
 #define Distance_wheel_center 0.475
 #define Wheel_radius  (0.355/2.0)
 #define wheel_base   0.89813
@@ -47,7 +48,7 @@ typedef struct{
 	uint8_t lamp_rear_primary;
 	uint8_t lamp_rear_secondary;
 
-	uint8_t standby1;
+	uint8_t buzzer;
 	uint8_t standby2;
 	uint8_t standby3;
 	uint8_t standby4;
@@ -66,8 +67,8 @@ typedef struct{
 
 typedef struct{
 
-	int32_t front_left_motor;
-	int32_t front_right_motor;
+	int16_t front_left_motor;
+	int16_t front_right_motor;
 	int16_t back_left_motor;
 	int16_t back_right_motor;
 
@@ -88,6 +89,7 @@ extern x3cator_encoder x3cator_rpm;
 
 void x3cator_velocityset(float linear,float angular);
 void x3cator_request_encoder_rpm();
+void x3cator_velocity_fromRPM(float* linear_velocity,float* angular_velocity);
 
 void x3cator_update();
 #endif /* SRC_X3CATOR_S_X3CATOR_H_ */

@@ -10,26 +10,28 @@
 
 #include "stm32f4xx_hal.h"
 #include "../TIMER/tim.h"
-#include "../Freertos/freertos.h"
 
-
-#define NUM_LEDS 60
+#define NUM_LEDS 58
 #define BUFF_LEN 48
 
-uint32_t pwm_buffer[BUFF_LEN];
-volatile int led_data_index = 0;
-volatile uint8_t is_sending = 0;
+extern uint32_t pwm_buffer[BUFF_LEN];
+extern volatile int led_data_index;
+extern volatile uint8_t is_sending;
 
 // LED color buffer
 typedef struct {
     uint8_t r, g, b;
 } RGB_Color;
 
-RGB_Color led_colors[NUM_LEDS];
+extern RGB_Color led_colors[NUM_LEDS];
 
-// Animation control
+// Animation types
 typedef enum {
-    ANIM_FADE_RED,
+    ANIM_OFF,              // All LEDs off
+    ANIM_SOLID,            // Solid color (controllable RGB)
+    ANIM_FLASH,            // Flashing color (controllable frequency)
+    ANIM_SOS,              // SOS pattern in red
+    ANIM_FADE_YELLOW,
     ANIM_FADE_RGB,
     ANIM_RAINBOW,
     ANIM_BREATHING,
@@ -39,35 +41,45 @@ typedef enum {
     ANIM_COUNT
 } AnimationType;
 
-typedef enum {
-	RED,
-	GREEN,
-	BLUE
-} Animationcolor;
-
+// Animation state
 typedef struct {
     AnimationType type;
     uint32_t start_time;
     uint32_t duration;      // Duration for one cycle in ms
     float phase;            // Current phase (0.0 to 1.0)
     uint8_t speed;          // Speed multiplier (1-10)
-
+    uint8_t red;            // Custom red value (0-255)
+    uint8_t green;          // Custom green value (0-255)
+    uint8_t blue;           // Custom blue value (0-255)
+    uint8_t flash_freq;     // Flash frequency in Hz (1-10)
 } AnimationState;
 
-AnimationState anim_state = {
-    .type = ANIM_FADE_RGB,
-    .start_time = 0,
-    .duration = 2000,
-    .phase = 0.0f,
-    .speed = 1
-};
+extern AnimationState anim_state;
 
-
+// Public functions
 void Set_Animation(AnimationType type, uint32_t duration);
+void Set_Solid_Color(uint8_t r, uint8_t g, uint8_t b);
+void Set_Flash_Frequency(uint8_t freq_hz);
+void Update_Animation(void);
+void WS2812_Start(void);
+void RGB_task(void* argument);
 
+// Internal animation functions
+void Anim_Off(void);
+void Anim_Solid(void);
+void Anim_Flash(float phase);
+void Anim_SOS(float phase);
+void Anim_FadeYellow(float phase);
+void Anim_FadeRGB(float phase);
+void Anim_Rainbow(float phase);
+void Anim_Breathing(float phase);
+void Anim_Chase(float phase);
+void Anim_Sparkle(float phase);
+void Anim_Wave(float phase);
 
-
-
+// Helper functions
+float ease_in_out_cubic(float t);
+uint8_t lerp_u8(uint8_t start, uint8_t end, float t);
+void HSV_to_RGB(float h, float s, float v, uint8_t *r, uint8_t *g, uint8_t *b);
 
 #endif /* SRC_RGB_RGB_H_ */
-

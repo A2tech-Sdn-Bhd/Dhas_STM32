@@ -28,6 +28,7 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 //#include "main.h"
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_gpio.h"
 
 typedef struct{
 	GPIO_TypeDef* GPIO_PORT;

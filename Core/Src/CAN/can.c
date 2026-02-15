@@ -95,8 +95,11 @@ void MX_CAN2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN2_Init 2 */
-
+	CAN2_filterconfig();
+	HAL_CAN_Start(&hcan2);
+	HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END CAN2_Init 2 */
+
 
 }
 
@@ -168,11 +171,7 @@ uint8_t data[8];
 uint8_t can_recieved;
 
 
-typedef struct {
-    float TotalVoltage_V;
-    float Current_A;
-    float Capacity_Ah;
-} BMS_Data_t;
+
 
 BMS_Data_t bmsData;
 
@@ -186,21 +185,21 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){
 
     	if(CANRxMessage.StdId == 0x581){
 
-    		if(data[1]==0x04 && data[3]==1)
-    		x3cator_rpm.front_right_motor= (data[4])| (data[5]<<8) | (data[6]<<16) | (data[7]<<24);
+    		if(data[1]==0x03 && data[3]==1)
+    		x3cator_rpm.front_right_motor= (data[4])| (data[5]<<8);
 
-    		else if(data[1]==0x04 && data[3]==2)
-    		x3cator_rpm.front_left_motor= (data[4])| (data[5]<<8) | (data[6]<<16) | (data[7]<<24);
+    		else if(data[1]==0x03 && data[3]==2)
+    		x3cator_rpm.front_left_motor= (data[4])| (data[5]<<8);
 
     	}
 
 
     	else if(CANRxMessage.StdId == 0x582){
 
-    		if(data[1]==0x04 && data[3]==1)
-    		x3cator_rpm.back_left_motor= (data[4])| (data[5]<<8) | (data[6]<<16) | (data[7]<<24);
+    		if(data[1]==0x03 && data[3]==1)
+    		x3cator_rpm.back_left_motor= (data[4])| (data[5]<<8);
 
-    		else if(data[1]==0x04 && data[3]==2)
+    		else if(data[1]==0x03 && data[3]==2)
     		x3cator_rpm.back_right_motor= (data[4])| (data[5]<<8);
 
     	}

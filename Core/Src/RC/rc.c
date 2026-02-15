@@ -188,6 +188,14 @@ void RC_update(){
 	x3cator_RC.angular_vel*=x3cator_speed*x3cator_RC.scale;
 	x3cator_RC.safety_override=(rc[6].pulse<20000)? 0:1;
 
+	if(rc[4].pulse > 530)
+	x3cator_RC.RC_reset=1;
+
+	if((rc[4].pulse < 530) && x3cator_RC.RC_reset && x3cator_RC.validity== VALID){
+
+		HAL_NVIC_SystemReset();
+	}
+
 
 }
 

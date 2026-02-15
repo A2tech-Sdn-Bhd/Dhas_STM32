@@ -1,5 +1,5 @@
-../Core/Src/MAIN/main.c:62:5:main	8	static
-../Core/Src/MAIN/main.c:94:6:StartmicrorosTask	24	static
-../Core/Src/MAIN/main.c:135:6:startmainTask	24	static
-../Core/Src/MAIN/main.c:179:6:HAL_TIM_PeriodElapsedCallback	16	static
-../Core/Src/MAIN/main.c:197:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/MAIN/main.c:52:5:main	8	static
+../Core/Src/MAIN/main.c:80:6:StartmicrorosTask	24	static
+../Core/Src/MAIN/main.c:121:6:startmainTask	24	static
+../Core/Src/MAIN/main.c:182:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/MAIN/main.c:200:6:Error_Handler	4	static,ignoring_inline_asm
