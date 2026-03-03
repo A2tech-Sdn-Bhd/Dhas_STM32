@@ -181,7 +181,7 @@ void RC_update(){
     RC_state_check();
 
 	x3cator_RC.linear_vel=(rc[YSTICK].pulse-750.0)/250.0;
-	x3cator_RC.angular_vel=(rc[XSTICK].pulse-750.0)/250.0;
+	x3cator_RC.angular_vel=-(rc[XSTICK].pulse-750.0)/250.0;
 	x3cator_RC.scale=(rc[SPEED].pulse-500.0)/500.0;
 	x3cator_RC.auto_switch=(rc[SWITCH].pulse<20000)? 0:1;
 	x3cator_RC.linear_vel*=x3cator_speed*x3cator_RC.scale;

@@ -23,8 +23,8 @@ float safety_vel_linear,safety_vel_angular;
 
 void x3cator_velocityset(float linear,float angular){
 
-     wl = (linear + (angular * wheel_base / 2.0)) / Wheel_radius;
-     wr = (linear - (angular * wheel_base / 2.0)) / Wheel_radius;
+     wl = (linear - (angular * wheel_base / 2.0)) / Wheel_radius;
+     wr = (linear + (angular * wheel_base / 2.0)) / Wheel_radius;
 
 //	wl=(linear+angular);
 //	wr=(linear-angular);
@@ -33,10 +33,12 @@ void x3cator_velocityset(float linear,float angular){
 	speedR=(wr*60/(2*M_PI))*gear_ratio;
 	speedL=(wl*60/(2*M_PI))*gear_ratio;
 
-	if(fabs(speedR)<150)
+	if(x3cator_state != AUTONOMOUS){
+	if(fabs(speedR)<200)
 	speedR=0;
-	if(fabs(speedL)<150)
+	if(fabs(speedL)<200)
 	speedL=0;
+	}
 
 	backmotor_data[0] = 0x23; backmotor_data[1] = 0x02; backmotor_data[2] = 0x20;
 	frontmotor_data[0] = 0x23; frontmotor_data[1] = 0x02; frontmotor_data[2] = 0x20;

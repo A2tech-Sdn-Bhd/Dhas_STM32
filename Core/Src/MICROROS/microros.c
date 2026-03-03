@@ -17,6 +17,7 @@ rcl_allocator_t allocator;
 rcl_node_t node;
 rclc_executor_t executor;
 geometry_msgs__msg__Twist vel;
+uint8_t vel_heartbeat=0;
 
 dhas_stm32_interfaces__msg__Stm32Encoder ros_encoder;
 dhas_stm32_interfaces__msg__Stm32Battery ros_battery;
@@ -45,7 +46,7 @@ void microros_createsubscribers(void){
 	  &executor,
 	  &vel_subscriber,
 	  &vel,
-	  &subscription_callback,
+	  &vel_subscription_callback,
 	  ON_NEW_DATA);
 
 
@@ -124,6 +125,13 @@ void microros_createpublishers(void){
 
 void microros_spinnode(void){
 	rclc_executor_spin_some(&executor, 50 * 1000000);
+}
+
+
+
+void vel_subscription_callback(void){
+
+	vel_heartbeat++;
 }
 
 
@@ -302,6 +310,21 @@ void microros_safety_publish(){
     ros_safety.bumper=x3cator_PCB.safety_bumper;
 
 	rcl_publish(&safety_publisher, &ros_safety, NULL);
+
+
+}
+
+
+
+void microros_vel_heartbeat(void){
+
+	if(vel_heartbeat == 0){
+		vel.linear.x=0;
+		vel.angular.z=0;
+	}
+
+	vel_heartbeat=0;
+
 
 
 }

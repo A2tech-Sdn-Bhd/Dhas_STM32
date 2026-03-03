@@ -157,6 +157,7 @@ void startmainTask(void *argument)
 			microros_battery_publish();
 			microros_state_publish();
 			microros_safety_publish();
+			microros_vel_heartbeat();
 		}
 
 

@@ -15,6 +15,7 @@
 #include <uxr/client/transport.h>
 #include <rmw_microxrcedds_c/config.h>
 #include <rmw_microros/rmw_microros.h>
+#include <rclc_parameter/rclc_parameter.h>
 
 #include <geometry_msgs/msg/twist.h>
 #include <std_msgs/msg/bool.h>
@@ -80,8 +81,10 @@ rcl_ret_t microros_intitilize(void);
 void microros_createnode(void);
 void microros_createsubscribers(void);
 void microros_createpublishers(void);
+void microros_createparameters(void);
 void microros_spinnode(void);
 void subscription_callback();
+void vel_subscription_callback(void);
 void reset_subscription_callback();
 void microros_cleanup(void);
 void microros_recovery(void);
@@ -90,6 +93,7 @@ void microros_encoder_publish(void);
 void microros_battery_publish(void);
 void microros_state_publish(void);
 void microros_safety_publish(void);
+void microros_vel_heartbeat(void);
 
 
 #endif /* SRC_MICROROS_MICROROS_H_ */
