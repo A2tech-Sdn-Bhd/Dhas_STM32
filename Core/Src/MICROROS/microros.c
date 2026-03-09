@@ -12,6 +12,7 @@ rclc_support_t support;
 rcl_subscription_t vel_subscriber;
 rcl_subscription_t control_subscriber;
 rcl_subscription_t reset_subscriber;
+rcl_subscription_t buzzer_subscriber;
 
 rcl_allocator_t allocator;
 rcl_node_t node;
@@ -25,6 +26,7 @@ dhas_stm32_interfaces__msg__Stm32State   ros_status;
 dhas_stm32_interfaces__msg__Stm32Safety   ros_safety;
 dhas_stm32_interfaces__msg__Stm32Control ros_control_flags;
 std_msgs__msg__Bool ros_reset;
+std_msgs__msg__Bool ros_buzzer;
 
 rcl_publisher_t encoder_publisher;
 rcl_publisher_t safety_publisher;
@@ -73,6 +75,19 @@ void microros_createsubscribers(void){
 	  &reset_subscriber,
 	  &ros_reset,
 	  &reset_subscription_callback,
+	  ON_NEW_DATA);
+
+
+	rclc_subscription_init_default(
+			&buzzer_subscriber,
+			&node,
+			ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg,Bool),
+			"/stm32/buzzer");
+	rclc_executor_add_subscription(
+	  &executor,
+	  &buzzer_subscriber,
+	  &ros_buzzer,
+	  &subscription_callback,
 	  ON_NEW_DATA);
 
 
@@ -230,7 +245,7 @@ bool microros_init(void) {
 
     // 6. Initialize executor
     ret = rclc_executor_init(&executor, &support.context,
-                            3, &allocator);
+                            4, &allocator);
     if (ret != RCL_RET_OK) {
         rcl_node_fini(&node);
         rclc_support_fini(&support);
@@ -268,7 +283,7 @@ void microros_recovery(){
 void microros_encoder_publish(){
 
 
-        x3cator_velocity_fromRPM(&ros_encoder.linear_velocity,&ros_encoder.angular_velocity);
+        x3cator_velocity_fromRPM(&ros_encoder.linear_veloctiy,&ros_encoder.angular_velocity);
 
 		rcl_publish(&encoder_publisher, &ros_encoder, NULL);
 

@@ -84,7 +84,8 @@ Core/Src/MICROROS/usb_cdc_transport.o: \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../USB_DEVICE/Target/usbd_conf.h ../Core/Src/MAIN/main.h \
- ../Core/Src/MAIN/../Freertos/freertos.h ../Core/Src/MICROROS/microros.h \
+ ../Core/Src/MAIN/../Freertos/freertos.h \
+ ../Core/Src/MAIN/../MICROROS/microros.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/rcl.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/init.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/allocator.h \
@@ -388,7 +389,7 @@ Core/Src/MICROROS/usb_cdc_transport.o: \
 ../USB_DEVICE/Target/usbd_conf.h:
 ../Core/Src/MAIN/main.h:
 ../Core/Src/MAIN/../Freertos/freertos.h:
-../Core/Src/MICROROS/microros.h:
+../Core/Src/MAIN/../MICROROS/microros.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/rcl.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/init.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/allocator.h:

@@ -259,7 +259,7 @@ Core/Src/Lidar/lidar.o: ../Core/Src/Lidar/lidar.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Src/MICROROS/microros.h ../Core/Src/MAIN/../CAN/can.h \
+ ../Core/Src/MAIN/../MICROROS/microros.h ../Core/Src/MAIN/../CAN/can.h \
  ../Core/Src/MAIN/../CAN/../X3CATOR-S/x3cator.h \
  ../Core/Src/MAIN/../CAN/../X3CATOR-S/../CAN/can.h \
  ../Core/Src/MAIN/../CAN/../X3CATOR-S/../GPIO/gpio.h \
@@ -555,7 +555,7 @@ Core/Src/Lidar/lidar.o: ../Core/Src/Lidar/lidar.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-../Core/Src/MICROROS/microros.h:
+../Core/Src/MAIN/../MICROROS/microros.h:
 ../Core/Src/MAIN/../CAN/can.h:
 ../Core/Src/MAIN/../CAN/../X3CATOR-S/x3cator.h:
 ../Core/Src/MAIN/../CAN/../X3CATOR-S/../CAN/can.h:

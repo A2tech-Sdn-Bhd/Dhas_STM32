@@ -66,6 +66,7 @@ extern rcl_allocator_t allocator;
 extern rcl_node_t node;
 extern rclc_executor_t executor;
 extern geometry_msgs__msg__Twist vel;
+extern std_msgs__msg__Bool ros_buzzer;
 extern rcl_publisher_t encoder_publisher;
 extern rcl_publisher_t safety_publisher;
 extern rcl_publisher_t status_publisher;
