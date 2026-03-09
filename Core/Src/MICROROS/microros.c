@@ -283,7 +283,7 @@ void microros_recovery(){
 void microros_encoder_publish(){
 
 
-        x3cator_velocity_fromRPM(&ros_encoder.linear_veloctiy,&ros_encoder.angular_velocity);
+        x3cator_velocity_fromRPM(&ros_encoder.linear_velocity,&ros_encoder.angular_velocity);
 
 		rcl_publish(&encoder_publisher, &ros_encoder, NULL);
 

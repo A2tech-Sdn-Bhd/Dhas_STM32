@@ -247,7 +247,7 @@ void x3cator_IDLE(){
 
 	x3cator_PCB.lamp_white=0;
 	x3cator_PCB.lamp_yellow=0;
-	x3cator_PCB.buzzer=0;
+	x3cator_PCB.buzzer=ros_buzzer.data;
 
 	x3cator_state_update();
 
@@ -259,7 +259,7 @@ void x3cator_MANUAL(){
 
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
-	x3cator_PCB.buzzer=0;
+	x3cator_PCB.buzzer=ros_buzzer.data;
 
     if(ros_control_flags.ros_manual && x3cator_RC.validity != VALID)
     	x3cator_velocityset(vel.linear.x,vel.angular.z);
@@ -280,7 +280,7 @@ void x3cator_AUTONOMUS(){
 
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
-	x3cator_PCB.buzzer=0;
+	x3cator_PCB.buzzer=ros_buzzer.data;
 
 
     x3cator_velocityset(vel.linear.x,vel.angular.z);
@@ -311,7 +311,7 @@ void x3cator_SAFETY_LIMITED(){
 
     x3cator_PCB.motordriver1_brake=0;
     x3cator_PCB.motordriver2_brake=0;
-	x3cator_PCB.buzzer=0;
+	x3cator_PCB.buzzer=ros_buzzer.data;
 
 
     if(x3cator_previous_state==MANUAL && x3cator_RC.validity == VALID){
