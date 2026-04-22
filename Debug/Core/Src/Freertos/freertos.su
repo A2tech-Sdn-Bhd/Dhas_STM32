@@ -1,1 +1,4 @@
-../Core/Src/Freertos/freertos.c:59:6:Freertos_start	8	static
+../Core/Src/Freertos/freertos.c:93:6:Freertos_start	8	static
+../Core/Src/Freertos/freertos.c:123:6:high_freq_Callback	16	static
+../Core/Src/Freertos/freertos.c:130:6:meduim_freq_timer_Callback	16	static
+../Core/Src/Freertos/freertos.c:137:6:low_freq_Callback	16	static

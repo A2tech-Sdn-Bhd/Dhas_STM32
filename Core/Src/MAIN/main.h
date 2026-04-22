@@ -29,13 +29,14 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 
 #include "../Freertos/freertos.h"
-#include "microros.h"
+#include "../MICROROS/microros.h"
 #include "../CAN/can.h"
 #include "../TIMER/tim.h"
 #include "../GPIO/gpio.h"
 #include "../RC/rc.h"
 #include "../X3CATOR-S/x3cator.h"
 #include "../WDG/wdg.h"
+#include "../ADC/adc.h"
 
 
 //#include "microros.h"

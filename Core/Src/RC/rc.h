@@ -12,22 +12,30 @@
 #include "../TIMER/tim.h"
 #include "../GPIO/gpio.h"
 #include "../Moving_average/movg.h"
-#define x3cator_speed 3.0
+#define x3cator_speed 1.5
 
 
 
 enum{
-XSTICK,
-YSTICK,
-SPEED,
-SWITCH,
-CHANNEL5,
-CHANNEL6,
-CHANNEL7,
-CHANNEL8,
-CHANNEL9,
-CHANNEL10
+	XSTICK,
+	YSTICK,
+	SPEED,
+	SWITCH,
+	CHANNEL5,
+	CHANNEL6,
+	CHANNEL7,
+	CHANNEL8,
+	CHANNEL9,
+	CHANNEL10
 };
+
+
+typedef enum{
+	NOT_STARTED,
+	NOT_VALID,
+	VALID,
+	DISCONNECTED
+}rc_validity_t;
 
 
 
@@ -61,7 +69,12 @@ typedef struct{
 	float filtered_angular_vel;
 	float scale;
 	uint8_t auto_switch;
+	uint8_t safety_override;
+	rc_validity_t validity;
+	uint8_t RC_reset;
 }RC_State_t;
+
+
 
 
 extern RC_State_t x3cator_RC;
@@ -72,5 +85,6 @@ void Channel_handler(RC_Channel_t * rc);
 void RC_intialize();
 void channel_3handle();
 void RC_update();
+void RC_state_check();
 
 #endif /* SRC_RC_RC_H_ */

@@ -25,6 +25,7 @@
 typedef StaticTask_t osStaticThreadDef_t;
 
 
+
 osThreadId_t microrosTaskHandle;
 uint32_t defaultTaskBuffer[ 3000 ];
 osStaticThreadDef_t defaultTaskControlBlock;
@@ -38,7 +39,7 @@ const osThreadAttr_t microrosTask_attributes = {
 };
 /* Definitions for mainTask */
 osThreadId_t mainTaskHandle;
-uint32_t mainTaskBuffer[ 5000 ];
+uint32_t mainTaskBuffer[ 7000];
 osStaticThreadDef_t mainTaskControlBlock;
 const osThreadAttr_t mainTask_attributes = {
   .name = "mainTask",
@@ -47,6 +48,39 @@ const osThreadAttr_t mainTask_attributes = {
   .stack_mem = &mainTaskBuffer[0],
   .stack_size = sizeof(mainTaskBuffer),
   .priority = (osPriority_t) osPriorityAboveNormal,
+};
+
+
+
+/*definitions of RGB task*/
+osThreadId_t RGBTaskHandle;
+uint32_t RGBTaskBuffer[ 512 ];
+osStaticThreadDef_t RGBTaskControlBlock;
+const osThreadAttr_t RGBTask_attributes = {
+  .name = "RGBTask",
+  .cb_mem = &RGBTaskControlBlock,
+  .cb_size = sizeof(RGBTaskControlBlock),
+  .stack_mem = &RGBTaskBuffer[0],
+  .stack_size = sizeof(RGBTaskBuffer),
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+
+osTimerId_t high_freq_timer;
+osTimerId_t meduim_freq_timer;
+osTimerId_t low_freq_timer;
+
+
+const osTimerAttr_t high_freq_timer_attributes = {
+    .name = "OperationTimer",
+};
+
+const osTimerAttr_t meduim_freq_timer_attributes = {
+    .name = "HeartbeatTimer",
+};
+
+const osTimerAttr_t low_freq_timer_attributes = {
+    .name = "BatteryTimer",
 };
 
 /* Private includes ----------------------------------------------------------*/
@@ -62,9 +96,18 @@ void Freertos_start(void ){
 
 	  microrosTaskHandle = osThreadNew(StartmicrorosTask, NULL, &microrosTask_attributes);
 	  mainTaskHandle = osThreadNew(startmainTask, NULL, &mainTask_attributes);
+	  RGBTaskHandle = osThreadNew(RGB_task, NULL, &RGBTask_attributes);
 
+	  high_freq_timer = osTimerNew(high_freq_Callback, osTimerPeriodic, NULL, &high_freq_timer_attributes);
+	  meduim_freq_timer = osTimerNew(meduim_freq_timer_Callback, osTimerPeriodic, NULL, &meduim_freq_timer_attributes);
+	  low_freq_timer = osTimerNew(low_freq_Callback, osTimerPeriodic, NULL, &low_freq_timer_attributes);
+
+	  osTimerStart(high_freq_timer,5);
+	  osTimerStart(meduim_freq_timer,20);
+	  osTimerStart(low_freq_timer,100);
 
 	  osKernelStart();
+
 
 
 
@@ -74,6 +117,29 @@ void Freertos_start(void ){
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+uint32_t time_test;
+
+void high_freq_Callback(void *argument){
+
+	osThreadFlagsSet(mainTaskHandle,HIGH_FREQ_FLAG);
+	time_test++;
+
+}
+
+void meduim_freq_timer_Callback(void *argument){
+
+	osThreadFlagsSet(mainTaskHandle,MEDUIM_FREQ_FLAG);
+
+}
+
+
+void low_freq_Callback(void *argument){
+
+	osThreadFlagsSet(mainTaskHandle,LOW_FREQ_FLAG);
+
+}
+
 
 /* USER CODE END PD */
 

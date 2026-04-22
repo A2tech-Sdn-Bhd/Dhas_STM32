@@ -9,6 +9,8 @@
 #define SRC_LIDAR_LIDAR_H_
 
 #include "../GPIO/gpio.h"
+#include "../RC/rc.h"
+#include "../MICROROS/microros.h"
 
 
 
@@ -23,6 +25,16 @@ typedef struct{
 	uint8_t L2DI_3;
 	uint8_t L2DI_4;
 
+	uint8_t zone1;
+	uint8_t zone2;
+	uint8_t zone3;
+	uint8_t zone4;
+	uint8_t zone5;
+	uint8_t zone6;
+
+	uint8_t Safety_limited;
+	uint8_t E_STOP;
+	uint8_t override;
 
 }lidar_t;
 

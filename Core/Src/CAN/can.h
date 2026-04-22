@@ -27,12 +27,21 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "../X3CATOR-S/x3cator.h"
 
 /* USER CODE BEGIN Includes */
+typedef struct {
+    float TotalVoltage_V;
+    float Current_A;
+    float Capacity_Ah;
+} BMS_Data_t;
+
+extern BMS_Data_t bmsData;
 
 /* USER CODE END Includes */
 
 extern CAN_HandleTypeDef hcan2;
+extern CAN_RxHeaderTypeDef CANRxMessage;
 
 /* USER CODE BEGIN Private defines */
 

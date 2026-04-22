@@ -15,7 +15,7 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h \
- ../Core/Src/MICROROS/microros.h \
+ ../Core/Src/MAIN/../MICROROS/microros.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/rcl.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/init.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/allocator.h \
@@ -159,17 +159,67 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/ping.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/timing.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/custom_transport.h \
- ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/int32.h \
- ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/int32__struct.h \
- ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/int32__functions.h \
- ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/rosidl_generator_c__visibility_control.h \
- ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/int32__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rclc_parameter/rclc_parameter.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/string.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/primitives_sequence.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_value__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/rosidl_generator_c__visibility_control.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter_value.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_value__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_value__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter_event.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_event__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_event__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_event__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/get_parameter_types.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameter_types__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameter_types__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameter_types__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/get_parameters.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameters__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameters__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameters__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/set_parameters_result.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/set_parameters_result__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/set_parameters_result__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/set_parameters_result__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/list_parameters.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/list_parameters__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/list_parameters_result__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/list_parameters__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/list_parameters__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/set_parameters.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/set_parameters__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/set_parameters__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/set_parameters__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/describe_parameters.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/describe_parameters__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_descriptor__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/floating_point_range__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/integer_range__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/describe_parameters__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/describe_parameters__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter_descriptor.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_descriptor__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_descriptor__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/string_functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/primitives_sequence_functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rclc_parameter/visibility_control.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/twist.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__struct.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/vector3__struct.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__functions.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/rosidl_generator_c__visibility_control.h \
  ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/bool.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/bool__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/bool__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/rosidl_generator_c__visibility_control.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/bool__type_support.h \
  ../USB_DEVICE/App/usb_device.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h \
@@ -191,6 +241,9 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
@@ -204,17 +257,46 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
- ../Core/Src/MAIN/../CAN/can.h ../Core/Src/MAIN/../TIMER/tim.h \
- ../Core/Src/MAIN/../GPIO/gpio.h ../Core/Src/MAIN/../RC/rc.h \
- ../Core/Src/MAIN/../RC/../TIMER/tim.h \
- ../Core/Src/MAIN/../RC/../GPIO/gpio.h \
- ../Core/Src/MAIN/../RC/../Moving_average/movg.h \
- ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
- ../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h \
- ../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h \
- ../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h \
- ../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
- ../Core/Src/MAIN/../WDG/wdg.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_encoder.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_encoder__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_encoder__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/rosidl_generator_c__visibility_control.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_encoder__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_battery.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_battery__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_battery__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_battery__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_state.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_state__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_state__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_state__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_safety.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_safety__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_safety__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_safety__type_support.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_control.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_control__struct.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_control__functions.h \
+ ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_control__type_support.h \
+ ../Core/Src/MAIN/../CAN/can.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/x3cator.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../CAN/can.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/lidar.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/rc.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../TIMER/tim.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../TIMER/../DMA/dma.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../Moving_average/movg.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../MICROROS/microros.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/rc.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../MICROROS/microros.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RGB/rgb.h \
+ ../Core/Src/MAIN/../CAN/../X3CATOR-S/../RGB/../TIMER/tim.h \
+ ../Core/Src/MAIN/../TIMER/tim.h ../Core/Src/MAIN/../GPIO/gpio.h \
+ ../Core/Src/MAIN/../RC/rc.h ../Core/Src/MAIN/../X3CATOR-S/x3cator.h \
+ ../Core/Src/MAIN/../WDG/wdg.h ../Core/Src/MAIN/../ADC/adc.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
@@ -234,7 +316,7 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h:
-../Core/Src/MICROROS/microros.h:
+../Core/Src/MAIN/../MICROROS/microros.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/rcl.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/init.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl/allocator.h:
@@ -378,17 +460,67 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/ping.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/timing.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rmw_microros/custom_transport.h:
-../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/int32.h:
-../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/int32__struct.h:
-../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/int32__functions.h:
-../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/rosidl_generator_c__visibility_control.h:
-../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/int32__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rclc_parameter/rclc_parameter.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/string.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/primitives_sequence.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_value__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/rosidl_generator_c__visibility_control.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter_value.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_value__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_value__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter_event.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_event__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_event__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_event__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/get_parameter_types.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameter_types__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameter_types__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameter_types__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/get_parameters.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameters__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameters__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/get_parameters__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/set_parameters_result.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/set_parameters_result__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/set_parameters_result__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/set_parameters_result__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/list_parameters.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/list_parameters__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/list_parameters_result__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/list_parameters__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/list_parameters__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/set_parameters.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/set_parameters__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/set_parameters__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/set_parameters__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/describe_parameters.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/describe_parameters__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_descriptor__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/floating_point_range__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/integer_range__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/describe_parameters__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/srv/detail/describe_parameters__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/parameter_descriptor.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_descriptor__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rcl_interfaces/msg/detail/parameter_descriptor__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/string_functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rosidl_runtime_c/primitives_sequence_functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/rclc_parameter/visibility_control.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/twist.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__struct.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/vector3__struct.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__functions.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/rosidl_generator_c__visibility_control.h:
 ../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/geometry_msgs/msg/detail/twist__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/bool.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/bool__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/bool__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/rosidl_generator_c__visibility_control.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/std_msgs/msg/detail/bool__type_support.h:
 ../USB_DEVICE/App/usb_device.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
@@ -410,6 +542,9 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
@@ -423,19 +558,49 @@ Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_encoder.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_encoder__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_encoder__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/rosidl_generator_c__visibility_control.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_encoder__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_battery.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_battery__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_battery__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_battery__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_state.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_state__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_state__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_state__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_safety.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_safety__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_safety__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_safety__type_support.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/stm32_control.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_control__struct.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_control__functions.h:
+../micro_ros_stm32cubemx_utils/microros_static_library_ide/libmicroros/include/dhas_stm32_interfaces/msg/detail/stm32_control__type_support.h:
 ../Core/Src/MAIN/../CAN/can.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/x3cator.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../CAN/can.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../GPIO/gpio.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/lidar.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/rc.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../TIMER/tim.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../TIMER/../DMA/dma.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../GPIO/gpio.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../RC/../Moving_average/movg.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../Lidar/../MICROROS/microros.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RC/rc.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../MICROROS/microros.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RGB/rgb.h:
+../Core/Src/MAIN/../CAN/../X3CATOR-S/../RGB/../TIMER/tim.h:
 ../Core/Src/MAIN/../TIMER/tim.h:
 ../Core/Src/MAIN/../GPIO/gpio.h:
 ../Core/Src/MAIN/../RC/rc.h:
-../Core/Src/MAIN/../RC/../TIMER/tim.h:
-../Core/Src/MAIN/../RC/../GPIO/gpio.h:
-../Core/Src/MAIN/../RC/../Moving_average/movg.h:
 ../Core/Src/MAIN/../X3CATOR-S/x3cator.h:
-../Core/Src/MAIN/../X3CATOR-S/../CAN/can.h:
-../Core/Src/MAIN/../X3CATOR-S/../GPIO/gpio.h:
-../Core/Src/MAIN/../X3CATOR-S/../Lidar/lidar.h:
-../Core/Src/MAIN/../X3CATOR-S/../Lidar/../GPIO/gpio.h:
 ../Core/Src/MAIN/../WDG/wdg.h:
+../Core/Src/MAIN/../ADC/adc.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h:
 ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h:

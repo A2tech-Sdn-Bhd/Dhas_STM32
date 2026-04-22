@@ -10,8 +10,14 @@
 #include "../CAN/can.h"
 #include "../GPIO/gpio.h"
 #include "../Lidar/lidar.h"
+#include "../RC/rc.h"
+#include "../MICROROS/microros.h"
+#include "../RGB/rgb.h"
 #define Distance_wheel_center 0.475
-#define Wheel_radius  0.355/2.0
+#define Wheel_radius  (0.355/2.0)
+#define wheel_base   0.89813
+#define gear_ratio  30.0
+#define safety_limit 0.5
 
 
 //typedef union{
@@ -23,6 +29,17 @@
 //	}
 //};
 extern uint8_t txData[8];
+extern float safety_vel_linear,safety_vel_angular;
+
+typedef enum{
+	BOOTING,
+	IDLE,
+	MANUAL,
+	AUTONOMOUS,
+	SAFETY_LIMITED,
+	E_STOP,
+	FAULT
+}x3cator_state_t;
 
 typedef struct{
 
@@ -31,7 +48,7 @@ typedef struct{
 	uint8_t lamp_rear_primary;
 	uint8_t lamp_rear_secondary;
 
-	uint8_t standby1;
+	uint8_t buzzer;
 	uint8_t standby2;
 	uint8_t standby3;
 	uint8_t standby4;
@@ -44,15 +61,35 @@ typedef struct{
 	uint8_t motordriver2_enable;
 	uint8_t motordriver2_brake;
 
+
 }PCB_t;
 
 
+typedef struct{
 
-extern PCB_t x3cator;
+	int16_t front_left_motor;
+	int16_t front_right_motor;
+	int16_t back_left_motor;
+	int16_t back_right_motor;
+
+}x3cator_encoder;
+
+
+
+
+
+extern PCB_t x3cator_PCB;
+extern uint8_t mission_flag;
+extern x3cator_state_t x3cator_state;
+extern x3cator_state_t x3cator_previous_state;
+extern x3cator_encoder x3cator_rpm;
+
 //extern float speedL,speedR;
 //extern float wr,wl;
 
 void x3cator_velocityset(float linear,float angular);
+void x3cator_request_encoder_rpm();
+void x3cator_velocity_fromRPM(float* linear_velocity,float* angular_velocity);
 
 void x3cator_update();
 #endif /* SRC_X3CATOR_S_X3CATOR_H_ */
